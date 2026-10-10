@@ -25,7 +25,7 @@
   [✓] بخش ۲:
       - تولبار شناور انتخاب متن (P7, P8) با پالت رنگ متن و هایلایت
       - دستگیره و منوی بلوک (P5, P6): تبدیل به، رنگ، تکثیر، انتقال بالا/پایین، کپی پیوند بلوک، حذف
-      - بلوک‌ها: جدول، چک‌لیست، بلوک بازشو، بنر هشدار/اطلاعات، Mermaid، Markdown، تصویر، ویدیو، صدا، پیوست، رسانه درون‌خطی
+      - بلوک‌ها: جدول، چک‌لیست، بلوک بازشو، بنر هشدار/اطلاعات، Markdown، پیوند [[ ]] و گراف، تصویر، ویدیو، صدا، پیوست، رسانه درون‌خطی
       - درون‌خطی: ایموجی، اشاره به شخص/وظیفه/صفحه، بج، پیوند
       - برچسب‌های یادداشت زیر عنوان (مثل M1)، پنل سطل زباله با بازگردانی
   [✓] بخش ۳:
@@ -99,6 +99,20 @@ body:has(.main.is-home) #bhandle,body:has(.main.is-home) #ftb,body:has(.main.is-
 .pk-grid.ic{grid-template-columns:repeat(6,1fr)}.pk-grid.ic button{font-size:22px}
 .pk-note{padding:6px 10px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--border)}
 .mi{vertical-align:-0.18em}
+.slash .item.active{background:var(--hover);outline:1px solid var(--accent)}
+.editor .pagelink.wl{background:none;padding:0;color:var(--accent);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.editor .pagelink.wl.new{text-decoration-style:dashed;opacity:.8}
+.wlpop{position:fixed;z-index:85;display:none;min-width:240px;max-width:340px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:5px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.wlpop.show{display:block}.wi{display:flex;flex-direction:column;gap:1px;padding:7px 10px;border-radius:8px;cursor:pointer}
+.wi b{font-weight:600;font-size:14px}.wi small{color:var(--muted);font-size:11.5px}.wi.on,.wi:hover{background:var(--hover);outline:1px solid var(--accent)}
+.fsopt{grid-column:1/-1;display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--muted);padding:6px 4px}
+#graphView{position:fixed;inset:0;z-index:95;background:var(--bg);display:none;flex-direction:column;color:var(--text)}
+#graphView.show{display:flex}
+.gv-bar{display:flex;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;background:var(--panel);font-size:13px}
+.gv-bar label{display:flex;gap:4px;align-items:center;cursor:pointer}.gv-bar .sp{flex:1}
+.gv-bar input[type=text],.gv-bar select{padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit}
+#gvCanvas{flex:1;width:100%;min-height:0;display:block;cursor:grab;touch-action:none}
+#gvEmpty{position:absolute;top:52%;left:50%;transform:translate(-50%,-50%);max-width:440px;text-align:center;color:var(--muted);line-height:2.1;display:none;padding:20px;pointer-events:none}
 
 .cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .btn-big{padding:13px 26px;border-radius:14px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 38%,transparent)}
@@ -350,6 +364,8 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
         <button class="icon-btn" id="btnOpenSb" title="باز کردن سایدبار (Ctrl+B)">▤</button>
         <button class="icon-btn" id="btnHome" title="صفحهٔ اصلی">🏠</button>
         <button class="icon-btn" id="btnEmoji" title="ایموجی، آیکون و نماد">😀</button>
+        <button class="icon-btn" id="btnGraph" title="گراف یادداشت‌ها (Alt+G)">🕸</button>
+        <button class="icon-btn" id="btnFs" title="تمام‌صفحه (F11)">⛶</button>
         <button class="icon-btn" id="btnTheme" title="تاریک / روشن">🌙</button>
         <button class="icon-btn" id="btnExport" title="خروجی">⤓</button>
         <button class="icon-btn" id="btnToc" title="فهرست مطالب">☰</button>
@@ -378,9 +394,10 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
             <button data-k="btnSearch">🔍 جستجو</button><button data-k="btnNewFolder">📁 فولدر جدید</button>
             <button data-k="btnImport">⬆ وارد کردن فایل</button><button data-k="btnSync">☁ همگام‌سازی</button>
             <button data-k="btnVault">📂 پوشهٔ دفتر</button><button data-k="btnBackup">💾 پشتیبان</button>
-            <button data-k="btnTrash">🗑 سطل زباله</button><button data-k="btnToc">☰ فهرست مطالب</button></div></div>
+            <button data-k="btnTrash">🗑 سطل زباله</button><button data-k="btnGraph">🕸 گراف یادداشت‌ها</button></div></div>
         </div>
         <div class="hcard"><h3>🎨 رنگ دفتر</h3><div id="hSkins"></div></div>
+        <div class="hcard" style="margin-top:12px"><h3>🖥 نمایش</h3><div class="quick"><button data-k="btnFs">⛶ تمام‌صفحه (F11)</button><label class="fsopt"><input type="checkbox" id="autoFs"> همیشه تمام‌صفحه شروع شود</label></div></div>
       </div>
     </section>
     <div class="doc" id="doc">
@@ -419,6 +436,8 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
   <button data-c="italic" title="مورب"><i>I</i></button>
   <button data-c="bold" title="ضخیم"><b>B</b></button>
   <span class="sep"></span>
+  <button data-c="right" title="راست‌چین"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3h12M5 7h8M3 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><button data-c="center" title="وسط‌چین"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3h12M3 7h8M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><button data-c="left" title="چپ‌چین"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 3h12M1 7h8M1 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  <button data-c="wl" title="پیوند به یادداشت [[ ]]">[[ ]]</button>
   <button data-c="check" title="چک‌لیست">☑</button>
   <button data-c="ai" class="ai" title="بهبود نگارش">✦ بهبود</button>
 </div>
@@ -522,7 +541,7 @@ function applyTheme(){
   document.documentElement.dataset.theme=state.theme; document.documentElement.dataset.skin=sk;
   document.getElementById('btnTheme').textContent=state.theme==='dark'?'☀️':'🌙';
   localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk); localStorage.setItem('mn-skin-'+state.theme,sk);
-  const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.setAttribute('content',SKINS[sk].c);
+  const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.setAttribute('content',SKINS[sk].p);
   if(window.renderHome&&state.activeId===null) renderHome();
 }
 
@@ -594,11 +613,11 @@ const SLASH_GROUPS=[
   {g:'اخیراً استفاده شده',items:[['divider','—','جداکننده'],['codeblock','<>','بلوک کد'],['inlinecode','<>','کد درون‌خطی'],['ul','≡','لیست نقطه‌ای'],['toggle','▤','لیست بازشو'],['p','¶','متن ساده']]},
   {g:'پرکاربرد',items:[['center','≡','وسط‌چین'],['right','≡','راست‌چین'],['warn','⚠','بنر هشدار'],['quote','❝','بلوک نقل قول'],['h1','H1','عنوان ۱'],['table','▦','جدول']]},
   {g:'متن',items:[['h2','H2','عنوان ۲'],['h3','H3','عنوان ۳'],['h4','H4','عنوان ۴'],['ol','1.','لیست شماره‌دار'],['check','☑','چک‌لیست']]},
-  {g:'درون‌خطی',items:[['emoji','☺','ایموجی'],['icons','★','آیکون و نماد'],['mention','@','اشاره به شخص'],['task','☑','اشاره به وظیفه'],['pagelink','🔗','اشاره به صفحه']]},
+  {g:'درون‌خطی',items:[['emoji','☺','ایموجی'],['icons','★','آیکون و نماد'],['mention','@','اشاره به شخص'],['task','☑','اشاره به وظیفه'],['pagelink','🔗','پیوند یادداشت [[ ]]']]},
   {g:'قالب‌بندی',items:[['bold','T','متن ضخیم'],['italic','T','متن مورب'],['underline','U','زیرخط'],['strike','S','خط خورده'],['link','🔗','پیوند'],['color','T','رنگ متن'],['highlight','🖍','هایلایت'],['badge','🏷','بج'],['clear','—','پاک کردن قالب'],['left','≡','چپ‌چین']]},
   {g:'رسانه',items:[['embed','▶','رسانه درون‌خطی'],['video','🎬','ویدیو'],['audio','🎧','صدا']]},
   {g:'افزودن',items:[['import','⬆','وارد کردن فایل']]},
-  {g:'بلوک‌ها',items:[['info','ℹ','بنر اطلاعات'],['markdown','<>','بلوک Markdown'],['mermaid','◫','دیاگرام Mermaid'],['image','🖼','تصویر'],['file','📎','پیوست فایل'],['toc','☰','فهرست مطالب']]},
+  {g:'بلوک‌ها',items:[['info','ℹ','بنر اطلاعات'],['markdown','<>','بلوک Markdown'],['image','🖼','تصویر'],['file','📎','پیوست فایل'],['toc','☰','فهرست مطالب'],['graph','🕸','گراف یادداشت‌ها']]},
 ];
 const $slash=document.getElementById('slash');
 function showSlash(){
@@ -609,14 +628,42 @@ function showSlash(){
   $slash.style.left=Math.max(10,r.left-400)+'px';
   $slash.classList.add('show');
 }
-$editor.addEventListener('keyup',e=>{ if(e.key==='/') showSlash(); if(e.key==='Escape') $slash.classList.remove('show'); });
-$slash.addEventListener('mousedown',e=>{
-  const it=e.target.closest('.item'); if(!it) return; e.preventDefault();
-  document.execCommand('delete');
-  runBlockCommand(it.dataset.k); $slash.classList.remove('show'); scheduleSave();
-});
+let slashPos=null;
+function slashQuery(){ const s=getSelection(); if(!s.rangeCount||!slashPos||s.anchorNode!==slashPos.node) return null;
+  const q=s.anchorNode.nodeValue.slice(slashPos.off+1,s.anchorOffset); return (s.anchorOffset<=slashPos.off||/\s/.test(q))?null:q; }
+function filterSlash(){
+  const q=slashQuery(); if(q===null){ $slash.classList.remove('show'); return; }
+  let first=null; $slash.querySelectorAll('.item').forEach(it=>{ const ok=!q||it.textContent.includes(q); it.style.display=ok?'':'none'; it.classList.remove('active'); if(ok&&!first) first=it; });
+  $slash.querySelectorAll('.grid').forEach(g=>{ const any=[...g.children].some(c=>c.style.display!=='none'); g.style.display=any?'':'none'; if(g.previousElementSibling) g.previousElementSibling.style.display=any?'':'none'; });
+  if(first) first.classList.add('active'); else $slash.classList.remove('show'); }
+function pickSlash(it){
+  const s=getSelection();
+  if(slashPos&&s.rangeCount&&s.anchorNode===slashPos.node){ const r=document.createRange(); r.setStart(slashPos.node,slashPos.off); r.setEnd(s.anchorNode,s.anchorOffset); s.removeAllRanges(); s.addRange(r); }
+  document.execCommand('delete'); $slash.classList.remove('show'); slashPos=null;
+  runBlockCommand(it.dataset.k); scheduleSave(); }
+$editor.addEventListener('input',e=>{
+  if(e.data==='/'){ const s=getSelection(); slashPos={node:s.anchorNode,off:s.anchorOffset-1}; showSlash(); filterSlash(); }
+  else if($slash.classList.contains('show')) filterSlash(); });
+$editor.addEventListener('keyup',e=>{
+  if(e.key==='/'){ const s=getSelection(); slashPos={node:s.anchorNode,off:s.anchorOffset-1}; showSlash(); filterSlash(); }
+  else if(e.key==='Escape') $slash.classList.remove('show');
+  else if($slash.classList.contains('show')&&!['ArrowUp','ArrowDown','Enter'].includes(e.key)) filterSlash(); });
+$editor.addEventListener('keydown',e=>{
+  if(!$slash.classList.contains('show')) return;
+  const vis=[...$slash.querySelectorAll('.item')].filter(i=>i.style.display!=='none'); if(!vis.length) return;
+  let i=vis.findIndex(x=>x.classList.contains('active'));
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); vis.forEach(x=>x.classList.remove('active')); i=(i+(e.key==='ArrowDown'?1:-1)+vis.length)%vis.length; vis[i].classList.add('active'); vis[i].scrollIntoView({block:'nearest'}); }
+  else if(e.key==='Enter'){ e.preventDefault(); e.stopPropagation(); pickSlash(vis[Math.max(0,i)]); } },true);
+$slash.addEventListener('mousedown',e=>{ const it=e.target.closest('.item'); if(!it) return; e.preventDefault(); pickSlash(it); });
 document.addEventListener('mousedown',e=>{ if(!$slash.contains(e.target)) $slash.classList.remove('show'); });
 
+function alignBlocks(k){
+  const s=getSelection(); if(!s.rangeCount||!$editor.contains(s.anchorNode)) return;
+  const r=s.getRangeAt(0); let bl=[...$editor.children].filter(b=>r.intersectsNode(b));
+  if(!bl.length){ const b=topBlock(s.anchorNode); if(b) bl=[b]; }
+  bl.forEach(b=>{ if(!/^(PRE|HR|TABLE)$/.test(b.tagName)) b.style.textAlign=k; });
+  scheduleSave();
+}
 function runBlockCommand(k){
   const ex=(c,v)=>document.execCommand(c,false,v);
   switch(k){
@@ -630,7 +677,7 @@ function runBlockCommand(k){
     case 'inlinecode': ex('insertHTML','<code>code</code>&nbsp;'); break;
     case 'bold': ex('bold'); break; case 'italic': ex('italic'); break;
     case 'underline': ex('underline'); break; case 'strike': ex('strikeThrough'); break;
-    case 'center': ex('justifyCenter'); break; case 'right': ex('justifyRight'); break; case 'left': ex('justifyLeft'); break;
+    case 'center': case 'right': case 'left': alignBlocks(k); break;
     case 'clear': ex('removeFormat'); break;
     default: runBlockCommand2(k); // ← بخش ۲
   }
@@ -733,7 +780,6 @@ async function runBlockCommand2(k){
     case 'toggle': insertHTML('<details open><summary>عنوان بلوک بازشو</summary><div>محتوا اینجا...</div></details><p><br></p>'); break;
     case 'warn': insertHTML('<div class="callout warn"><span contenteditable="false">⚠️</span><div>متن هشدار</div></div><p><br></p>'); break;
     case 'info': insertHTML('<div class="callout info"><span contenteditable="false">ℹ️</span><div>متن اطلاعات</div></div><p><br></p>'); break;
-    case 'mermaid': insertHTML('<div class="mm"><pre class="src">graph TD\n  A[شروع] --> B[پایان]</pre><div class="out" contenteditable="false"></div></div><p><br></p>'); setTimeout(renderSpecial,50); break;
     case 'markdown': insertHTML('<div class="mdb"><pre class="src">## عنوان\n- آیتم **ضخیم**</pre><div class="out" contenteditable="false"></div></div><p><br></p>'); setTimeout(renderSpecial,50); break;
     case 'image': { const f=await pickFile('image/*'); if(f) insertHTML(`<p><img src="${f.url}" alt="${escapeHtml(f.name)}"></p><p><br></p>`); break; }
     case 'video': { const f=await pickFile('video/*'); if(f) insertHTML(`<p><video controls src="${f.url}"></video></p><p><br></p>`); break; }
@@ -766,21 +812,17 @@ function embedHtml(u){
 /* ---------- 14) Mermaid + Markdown (لود تنبل از CDN) ---------- */
 const loadScript=src=>new Promise(r=>{ if(document.querySelector(`script[src="${src}"]`)) return r(); const s=document.createElement('script'); s.src=src; s.onload=r; document.head.appendChild(s); });
 async function renderSpecial(){
-  const mms=$editor.querySelectorAll('.mm'), mds=$editor.querySelectorAll('.mdb');
-  if(mms.length){ await loadScript('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js');
-    mermaid.initialize({startOnLoad:false,theme:state.theme==='dark'?'dark':'default'});
-    for(const b of mms){ try{ const {svg}=await mermaid.render('m'+uid(),b.querySelector('.src').innerText); b.querySelector('.out').innerHTML=svg; }
-      catch(e){ b.querySelector('.out').textContent='⚠ خطا در دیاگرام'; } } }
+  const mds=$editor.querySelectorAll('.mdb');
   if(mds.length){ await loadScript('https://cdn.jsdelivr.net/npm/marked/marked.min.js');
     for(const b of mds) b.querySelector('.out').innerHTML=marked.parse(b.querySelector('.src').innerText); }
 }
-$editor.addEventListener('focusout',e=>{ if(e.target.closest?.('.mm,.mdb')||$editor.querySelector('.mm,.mdb')) renderSpecial().then(scheduleSave); });
+$editor.addEventListener('focusout',e=>{ if(e.target.closest?.('.mdb')||$editor.querySelector('.mdb')) renderSpecial().then(scheduleSave); });
 
 /* ---------- 15) کلیک‌های داخل ادیتور: چک‌لیست، پیوند صفحه ---------- */
 $editor.addEventListener('click',e=>{
   const cb=e.target.closest('.cb');
   if(cb){ const li=cb.parentElement; li.dataset.done=li.dataset.done==='1'?'0':'1'; scheduleSave(); return; }
-  const pl=e.target.closest('.pagelink'); if(pl){ openNote(pl.dataset.id); return; }
+  const pl=e.target.closest('.pagelink'); if(pl){ window.openWikiLink(pl); return; }
   const a=e.target.closest('a[href]:not(.att)'); if(a&&(e.ctrlKey||e.metaKey)) window.open(a.href,'_blank');
 });
 /* Enter داخل چک‌لیست = آیتم جدید */
@@ -831,6 +873,7 @@ function showBlockMenu(b,x,y){
     <div class="mi" data-a="dup">⧉ تکثیر</div>
     <div class="mi" data-a="up">↑ انتقال به بالا</div>
     <div class="mi" data-a="down">↓ انتقال به پایین</div>
+    <div class="mi" data-a="al-center">≡ وسط‌چین</div><div class="mi" data-a="al-right">≡ راست‌چین</div><div class="mi" data-a="al-left">≡ چپ‌چین</div>
     <hr><div class="mi" data-a="copylink">🔗 کپی پیوند بلوک</div>
     <hr><div class="mi danger" data-a="del">🗑 حذف</div>`;
   $ctx.style.left=Math.max(10,x-220)+'px'; $ctx.style.top=Math.min(y,innerHeight-360)+'px'; $ctx.classList.add('show');
@@ -848,6 +891,7 @@ $ctx.addEventListener('click',async e=>{
     case 'dup': { const c=b.cloneNode(true); c.removeAttribute('data-bid'); b.after(c); break; }
     case 'up': b.previousElementSibling&&b.previousElementSibling.before(b); break;
     case 'down': b.nextElementSibling&&b.nextElementSibling.after(b); break;
+    case 'al-center': case 'al-right': case 'al-left': b.style.textAlign=mi.dataset.a.slice(3); break;
     case 'copylink': { if(!b.dataset.bid) b.dataset.bid=uid(); const link=location.href.split('#')[0]+'#'+state.activeId+':'+b.dataset.bid;
       await navigator.clipboard?.writeText(link); $save.textContent='پیوند بلوک کپی شد 🔗'; break; }
     case 'addrow': { const tb=b.tBodies[0]||b, cols=b.rows[0].cells.length; const tr=tb.insertRow(); for(let i=0;i<cols;i++) tr.insertCell().innerHTML='<br>'; break; }
@@ -1036,6 +1080,7 @@ function runsOf(node,f={},out=[]){
     if(t==='IMG'){ out.push({img:c.getAttribute('src'),text:''}); continue; }
     if(t==='IFRAME'||t==='VIDEO'||t==='AUDIO'){ const s=c.getAttribute('src')||c.querySelector('source')?.getAttribute('src')||''; if(s&&!s.startsWith('data:')) out.push({...f,text:s,href:s}); else out.push({...f,text:t==='AUDIO'?'[صدا]':'[ویدیو]'}); continue; }
     if(t==='SCRIPT'||t==='STYLE'||cl.contains('cb')) continue;
+    if(t==='A'&&cl.contains('pagelink')){ const nm=(c.dataset.name||c.textContent).replace(/^📄\s*/,'').trim(), lb=c.textContent.replace(/^📄\s*/,'').trim(); out.push({...f,raw:1,text:'[['+nm+(lb&&lb!==nm?'|'+lb:'')+']]'}); continue; }
     if(t==='A'&&cl.contains('att')){ out.push({...f,text:'📎 '+(c.getAttribute('download')||'پیوست')}); continue; }
     if(t==='B'||t==='STRONG') g.b=1; if(t==='I'||t==='EM') g.i=1; if(t==='U') g.u=1;
     if(t==='S'||t==='STRIKE'||t==='DEL') g.s=1; if(t==='CODE') g.code=1; if(t==='MARK') g.mark=toHex(c.style.backgroundColor)||'FDE68A';
@@ -1101,7 +1146,7 @@ function mdInline(runs){
     if(r.text==='\n') return '  \n';
     const m=r.text.match(/^(\s*)([\s\S]*?)(\s*)$/); let [_,a,t,z]=m; if(!t) return r.text;
     if(r.code) t='`'+t+'`';
-    else { t=t.replace(/([*_`\\])/g,'\\$1'); if(r.b) t=`**${t}**`; if(r.i) t=`*${t}*`; if(r.s) t=`~~${t}~~`; if(r.u) t=`<u>${t}</u>`; if(r.mark) t=`<mark>${t}</mark>`; }
+    else if(!r.raw){ t=t.replace(/([*_`\\])/g,'\\$1'); if(r.b) t=`**${t}**`; if(r.i) t=`*${t}*`; if(r.s) t=`~~${t}~~`; if(r.u) t=`<u>${t}</u>`; if(r.mark) t=`<mark>${t}</mark>`; }
     if(r.href) t=`[${t}](${r.href})`;
     return a+t+z;
   }).join('').replace(/\*\*\*\*/g,'');
@@ -1432,7 +1477,7 @@ async function fileToHtml(f){
   if(ext==='md'||ext==='markdown'){ let t=await f.text(); await loadScript('https://cdn.jsdelivr.net/npm/marked/marked.min.js');
     let title=base; const m=t.match(/^#\s+(.+)\n/); if(m){ title=m[1].trim(); t=t.slice(m[0].length); }
     t=t.replace(/^(\s*)[-*] \[( |x)\] (.*)$/gmi,(_,s,x,tx)=>`${s}<ul class="checklist"><li data-done="${x.trim()?1:0}"><span class="cb" contenteditable="false"></span><span class="tx">${tx}</span></li></ul>`);
-    return {title,html:sanitize(marked.parse(t)).body}; }
+    return {title,html:(window.wlConvert||(x=>x))(sanitize(marked.parse(t)).body)}; }
   if(ext==='txt'){ const t=await f.text(); return {title:base,html:t.split(/\n{2,}/).map(p=>`<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('')}; }
   if(ext==='html'||ext==='htm'){ const s=sanitize(await f.text()); return {title:s.title.trim()||base,html:s.body}; }
   if(ext==='docx'){ await loadScript('https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js');
@@ -1580,7 +1625,7 @@ nodeMenu=function(n){
 /* =====================================================================
    37) میانبرهای کیبورد (مستقل از زبان کیبورد: با e.code)
    ===================================================================== */
-const KEYS=[['جستجو','Ctrl + P'],['خروجی','Ctrl + Shift + E'],['ذخیره','Ctrl + S'],['پیوند','Ctrl + K'],['عنوان ۱ تا ۴','Ctrl + Alt + 1…4'],
+const KEYS=[['جستجو','Ctrl + P'],['خروجی','Ctrl + Shift + E'],['ذخیره','Ctrl + S'],['پیوند','Ctrl + K'],['گراف یادداشت‌ها','Alt + G'],['پیوند یادداشت','[[ در متن'],['عنوان ۱ تا ۴','Ctrl + Alt + 1…4'],
   ['یادداشت جدید','Alt + N'],['فولدر جدید','Alt + Shift + N'],['فهرست مطالب','Alt + T'],['تاریک / روشن','Alt + D'],['باز/بستن سایدبار','Alt + B'],
   ['بهبود نگارش','Alt + I'],['همگام‌سازی الان','Alt + S'],['منوی بلوک‌ها','/'],['این راهنما','Ctrl + /']];
 $('keysList').innerHTML=KEYS.map(([a,b])=>`<span>${a}</span><span>${b.split(' + ').map(k=>`<kbd>${k}</kbd>`).join(' + ')}</span>`).join('');
@@ -1595,7 +1640,7 @@ document.addEventListener('keydown',e=>{
   else if(C&&c==='KeyS'&&e.key!=='s'){ e.preventDefault(); scheduleSave(); }
   else if(C&&e.altKey&&/^Digit[1-4]$/.test(c)&&!/^[1-4]$/.test(e.key)){ e.preventDefault(); runBlockCommand('h'+c.slice(5)); }
   else if(e.altKey&&!C){
-    const map={KeyT:()=>toggleToc(),KeyD:()=>$('btnTheme').click(),KeyB:()=>$('btnToggleSb').click(),KeyI:improve,KeyS:()=>syncNow(true),
+    const map={KeyT:()=>toggleToc(),KeyG:()=>window.openGraph&&openGraph(),KeyD:()=>$('btnTheme').click(),KeyB:()=>$('btnToggleSb').click(),KeyI:improve,KeyS:()=>syncNow(true),
       KeyN:()=>e.shiftKey?$('btnNewFolder').click():$('btnNewNote').click()};
     if(map[c]){ e.preventDefault(); map[c](); }
   }
@@ -1939,6 +1984,188 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySele
 const _rtH=renderTree;
 renderTree=function(){ const r=_rtH.apply(this,arguments); if(state.activeId===null&&window.renderHome) renderHome(); return r; };
 setInterval(()=>{ if(state.activeId===null){ homeGreet(); if(window.renderHome) renderHome(); } },20000);
+
+/* =====================================================================
+   44) پیوند یادداشت‌ها ([[ ]]) + گراف مثل Obsidian + تمام‌صفحه
+   ===================================================================== */
+const nameKey=s=>String(s||'').replace(/^📄\s*/,'').trim().replace(/\s+/g,' ').toLowerCase();
+const liveNotes=()=>state.nodes.filter(n=>n.type==='note'&&!n.deleted);
+const findNoteByName=nm=>liveNotes().find(n=>nameKey(n.name)===nameKey(nm));
+function wlHTML(target,id,label){ return `<a class="pagelink wl${id?'':' new'}" contenteditable="false" data-name="${escapeHtml(target)}" data-id="${id||''}">${escapeHtml(label||target)}</a>`; }
+window.wlConvert=html=>html.replace(/\[\[([^\]|\n]+?)(?:\|([^\]\n]+))?\]\]/g,(m,a,b)=>{ const n=findNoteByName(a); return wlHTML(a.trim(),n?n.id:'',(b||a).trim()); });
+function linkTarget(a){ const byId=a.dataset.id&&state.nodes.find(n=>n.id===a.dataset.id&&n.type==='note'&&!n.deleted); return byId||findNoteByName(a.dataset.name||a.textContent); }
+window.openWikiLink=async function(a){
+  let n=linkTarget(a);
+  if(!n){ const name=(a.dataset.name||a.textContent).replace(/^📄\s*/,'').trim(); if(!name) return;
+    const cur=state.nodes.find(x=>x.id===state.activeId);
+    n=await createNode('note',name,cur?cur.parentId:null); renderTree(); toast('یادداشت «'+name+'» ساخته شد ✨'); }
+  a.dataset.id=n.id; a.classList.remove('new'); scheduleSave(); openNote(n.id);
+};
+
+/* ---- پیشنهاد یادداشت‌ها وقتی [[ تایپ می‌شود ---- */
+const wlPop=document.createElement('div'); wlPop.id='wlpop'; wlPop.className='wlpop'; document.body.appendChild(wlPop);
+let wlS=null;
+function wlQuery(){ const s=getSelection(); if(!s.rangeCount||!$editor.contains(s.anchorNode)||s.anchorNode.nodeType!==3) return null;
+  const m=s.anchorNode.nodeValue.slice(0,s.anchorOffset).match(/\[\[([^\[\]]*)$/);
+  return m?{q:m[1],start:s.anchorOffset-m[0].length,end:s.anchorOffset,node:s.anchorNode}:null; }
+function wlRender(){
+  wlPop.innerHTML=wlS.items.map((it,i)=>`<div class="wi${i===wlS.idx?' on':''}" data-i="${i}"><b>${it.create?'➕ ':'📄 '}${escapeHtml(it.name)}</b><small>${escapeHtml(it.sub)}</small></div>`).join('');
+  const s=getSelection(); let r=s.getRangeAt(0).getBoundingClientRect(); if(!r.width&&!r.height) r=wlS.node.parentElement.getBoundingClientRect();
+  wlPop.classList.add('show');
+  wlPop.style.left=Math.max(8,Math.min(r.left,innerWidth-wlPop.offsetWidth-8))+'px';
+  wlPop.style.top=Math.min(r.bottom+6,innerHeight-wlPop.offsetHeight-8)+'px'; }
+function wlRefresh(){
+  const m=wlQuery(); if(!m){ wlPop.classList.remove('show'); wlS=null; return; }
+  const q=nameKey(m.q);
+  const items=liveNotes().filter(n=>n.id!==state.activeId&&(!q||nameKey(n.name).includes(q))).slice(0,7).map(n=>({id:n.id,name:n.name,sub:pathOf(n)}));
+  if(m.q.trim()&&!findNoteByName(m.q)) items.push({id:'',name:m.q.trim(),sub:'ساخت یادداشت جدید',create:true});
+  if(!items.length){ wlPop.classList.remove('show'); wlS=null; return; }
+  wlS={...m,items,idx:0}; wlRender(); }
+function putHTML(range,html){ const tpl=document.createElement('template'); tpl.innerHTML=html; const frag=tpl.content, last=frag.lastChild;
+  range.deleteContents(); range.insertNode(frag); const s=getSelection(), r=document.createRange(); r.setStartAfter(last); r.collapse(true); s.removeAllRanges(); s.addRange(r); }
+function wlApply(i){
+  const it=wlS&&wlS.items[i]; if(!it) return; const {node,start,end}=wlS;
+  const r=document.createRange(); r.setStart(node,start); r.setEnd(node,end);
+  putHTML(r,wlHTML(it.name,it.id)+'&nbsp;');
+  wlPop.classList.remove('show'); wlS=null; scheduleSave(); }
+wlPop.addEventListener('mousedown',e=>{ e.preventDefault(); const w=e.target.closest('.wi'); if(w) wlApply(+w.dataset.i); });
+$editor.addEventListener('input',()=>{
+  const s=getSelection();
+  if(s.rangeCount&&s.anchorNode&&s.anchorNode.nodeType===3&&$editor.contains(s.anchorNode)){   // تایپ دستی [[نام]] یا [[نام|متن]]
+    const m=s.anchorNode.nodeValue.slice(0,s.anchorOffset).match(/\[\[([^\[\]|]+)(?:\|([^\[\]]+))?\]\]$/);
+    if(m){ const r=document.createRange(); r.setStart(s.anchorNode,s.anchorOffset-m[0].length); r.setEnd(s.anchorNode,s.anchorOffset);
+      const n=findNoteByName(m[1]); putHTML(r,wlHTML(m[1].trim(),n?n.id:'',(m[2]||m[1]).trim())+'&nbsp;'); wlPop.classList.remove('show'); wlS=null; scheduleSave(); return; } }
+  wlRefresh(); });
+$editor.addEventListener('keydown',e=>{
+  if(!wlS||!wlPop.classList.contains('show')) return;
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); wlS.idx=(wlS.idx+(e.key==='ArrowDown'?1:-1)+wlS.items.length)%wlS.items.length; wlRender(); }
+  else if(e.key==='Enter'||e.key==='Tab'){ e.preventDefault(); e.stopPropagation(); wlApply(wlS.idx); }
+  else if(e.key==='Escape'){ wlPop.classList.remove('show'); wlS=null; } },true);
+document.addEventListener('mousedown',e=>{ if(!wlPop.contains(e.target)) wlPop.classList.remove('show'); });
+const _rb4=runBlockCommand2;
+runBlockCommand2=async function(k){
+  if(k==='pagelink'){ document.execCommand('insertText',false,'[['); wlRefresh(); return; }
+  if(k==='wl'){ const t=getSelection().toString().trim();
+    if(!t){ document.execCommand('insertText',false,'[['); wlRefresh(); return; }
+    const n=findNoteByName(t); putHTML(getSelection().getRangeAt(0),wlHTML(t,n?n.id:'')+'&nbsp;'); scheduleSave(); return; }
+  if(k==='graph'){ openGraph(); return; }
+  return _rb4(k);
+};
+
+/* ---- گراف یادداشت‌ها ---- */
+const G={on:false,nodes:[],edges:[],map:new Map(),adj:new Map(),k:1,tx:0,ty:0,alpha:1,hover:null,drag:null,pan:null,down:null,q:'',o:{orph:true,ghost:true,fold:false,local:false,depth:2}};
+const gv=document.createElement('div'); gv.id='graphView';
+gv.innerHTML=`<div class="gv-bar"><b>🕸 گراف یادداشت‌ها</b><input id="gvQ" type="text" placeholder="جستجو در گراف…">
+<label><input type="checkbox" id="gvOrph" checked> بدون پیوند</label><label><input type="checkbox" id="gvGhost" checked> نانوشته‌ها</label>
+<label><input type="checkbox" id="gvFold"> فولدرها</label><label><input type="checkbox" id="gvLocal"> فقط اطراف این یادداشت</label>
+<select id="gvDepth"><option value="1">۱ سطح</option><option value="2" selected>۲ سطح</option><option value="3">۳ سطح</option></select>
+<span id="gvInfo" class="muted"></span><span class="sp"></span><button id="gvClose" class="icon-btn" title="بستن (Esc)">✕</button></div>
+<canvas id="gvCanvas"></canvas><div id="gvEmpty"></div>`;
+document.body.appendChild(gv);
+window.mnMarkdown=n=>{ const d=document.createElement('div'); d.innerHTML=n.content||''; return toMarkdown(n.name,buildModel(d)); };
+window.mnGraph=G; G.cv=gv.querySelector('#gvCanvas'); G.ctx=G.cv.getContext('2d');
+function graphBuild(){
+  const o=G.o, notes=liveNotes(), nodes=new Map(), edges=[], seen=new Set(), old=new Map(G.nodes.map(n=>[n.id,n]));
+  const byName=new Map(notes.map(n=>[nameKey(n.name),n]));
+  const mk=(id,name,type)=>{ if(!nodes.has(id)){ const p=old.get(id), a=Math.random()*6.283, r=40+Math.random()*160;
+    nodes.set(id,{id,name,type,deg:0,x:p?p.x:Math.cos(a)*r,y:p?p.y:Math.sin(a)*r,vx:0,vy:0}); } return nodes.get(id); };
+  notes.forEach(n=>mk(n.id,n.name,'note'));
+  const add=(s,t,kind)=>{ if(s===t) return; const key=s+'>'+t; if(seen.has(key)) return; seen.add(key); edges.push({s,t,kind}); nodes.get(s).deg++; nodes.get(t).deg++; };
+  const dp=new DOMParser();
+  notes.forEach(n=>{
+    const d=dp.parseFromString('<body>'+(n.content||'')+'</body>','text/html');
+    const hit=(raw,idHint)=>{ const nm=nameKey(raw); if(!nm) return; let t=idHint&&nodes.has(idHint)&&nodes.get(idHint).type==='note'?idHint:null;
+      if(!t){ const x=byName.get(nm); if(x) t=x.id; }
+      if(!t){ if(!o.ghost) return; t='g:'+nm; mk(t,String(raw).replace(/^📄\s*/,'').trim(),'ghost'); }
+      add(n.id,t,'link'); };
+    d.querySelectorAll('a.pagelink').forEach(a=>hit(a.dataset.name||a.textContent,a.dataset.id));
+    (d.body.textContent.match(/\[\[([^\[\]|]+)(?:\|[^\[\]]+)?\]\]/g)||[]).forEach(m=>hit(m.slice(2,-2).split('|')[0]));
+  });
+  if(o.fold){ state.nodes.filter(f=>f.type==='folder'&&!f.deleted).forEach(f=>mk(f.id,f.name,'folder'));
+    state.nodes.filter(x=>!x.deleted&&x.parentId&&nodes.has(x.id)&&nodes.has(x.parentId)).forEach(x=>add(x.parentId,x.id,'folder')); }
+  let keep=new Set(nodes.keys());
+  if(!o.orph) keep=new Set([...keep].filter(id=>nodes.get(id).deg>0||nodes.get(id).type==='folder'&&o.fold));
+  if(o.local&&state.activeId&&nodes.has(state.activeId)){ const adj=new Map(); edges.forEach(e=>{ (adj.get(e.s)||adj.set(e.s,[]).get(e.s)).push(e.t); (adj.get(e.t)||adj.set(e.t,[]).get(e.t)).push(e.s); });
+    const lv=new Map([[state.activeId,0]]), q=[state.activeId]; while(q.length){ const c=q.shift(); if(lv.get(c)>=o.depth) continue; (adj.get(c)||[]).forEach(x=>{ if(!lv.has(x)){ lv.set(x,lv.get(c)+1); q.push(x); } }); }
+    keep=new Set([...keep].filter(id=>lv.has(id))); }
+  G.nodes=[...nodes.values()].filter(n=>keep.has(n.id)); G.map=new Map(G.nodes.map(n=>[n.id,n]));
+  G.edges=edges.filter(e=>G.map.has(e.s)&&G.map.has(e.t)); G.adj=new Map(G.nodes.map(n=>[n.id,new Set()]));
+  G.edges.forEach(e=>{ G.adj.get(e.s).add(e.t); G.adj.get(e.t).add(e.s); });
+  G.alpha=1; G.hover=null;
+  const links=G.edges.filter(e=>e.kind==='link').length;
+  gv.querySelector('#gvInfo').textContent=`${fa(G.nodes.filter(n=>n.type==='note').length)} یادداشت · ${fa(links)} پیوند`;
+  const em=gv.querySelector('#gvEmpty');
+  em.style.display=links?'none':'block';
+  em.innerHTML='هنوز پیوندی بین یادداشت‌ها نیست 🕸<br>داخل یک یادداشت <b>[[</b> بنویس و نام یادداشت دیگری را انتخاب کن، یا متنی را انتخاب کن و دکمهٔ <b>[[ ]]</b> را بزن. با کلیک روی پیوند، یادداشت جدید ساخته می‌شود و همین‌جا به گراف اضافه می‌شود.<br><small>(برای دیدن ساختار فولدرها گزینهٔ «فولدرها» را بزن)</small>';
+}
+function gStep(){
+  const N=G.nodes,E=G.edges,a=G.alpha; if(a<0.02) return;
+  for(let i=0;i<N.length;i++){ const p=N[i]; for(let j=i+1;j<N.length;j++){ const q=N[j]; let dx=p.x-q.x,dy=p.y-q.y,d2=dx*dx+dy*dy+0.01; if(d2>90000) continue;
+    const d=Math.sqrt(d2), f=2400*a/d2; dx/=d; dy/=d; p.vx+=dx*f; p.vy+=dy*f; q.vx-=dx*f; q.vy-=dy*f; } }
+  for(const e of E){ const s=G.map.get(e.s),t=G.map.get(e.t); let dx=t.x-s.x,dy=t.y-s.y; const d=Math.sqrt(dx*dx+dy*dy)||1, L=e.kind==='folder'?70:115, f=(d-L)*0.04*Math.max(a,.25); dx/=d; dy/=d; s.vx+=dx*f; s.vy+=dy*f; t.vx-=dx*f; t.vy-=dy*f; }
+  for(const n of N){ if(n===G.drag) continue; n.vx-=n.x*0.012*Math.max(a,.3); n.vy-=n.y*0.012*Math.max(a,.3); n.vx*=0.82; n.vy*=0.82; n.x+=n.vx; n.y+=n.vy; }
+  G.alpha*=0.992;
+}
+const nR=n=>n.type==='folder'?6:4.5+Math.min(12,n.deg*1.6);
+function gDraw(){
+  const c=G.cv, x=G.ctx, dpr=devicePixelRatio||1, W=c.width/dpr, H=c.height/dpr;
+  x.setTransform(dpr,0,0,dpr,0,0); x.clearRect(0,0,W,H);
+  const cs=getComputedStyle(document.documentElement), acc=cs.getPropertyValue('--accent').trim()||'#7c5cff', txt=cs.getPropertyValue('--text').trim()||'#eee', mut=cs.getPropertyValue('--muted').trim()||'#888', bd=cs.getPropertyValue('--border').trim()||'#444';
+  x.save(); x.translate(W/2+G.tx,H/2+G.ty); x.scale(G.k,G.k);
+  const hv=G.hover, nb=hv?G.adj.get(hv.id):null, q=nameKey(G.q);
+  for(const e of G.edges){ const s=G.map.get(e.s),t=G.map.get(e.t), on=hv&&(s===hv||t===hv);
+    x.globalAlpha=hv?(on?.95:.07):.5; x.strokeStyle=on?acc:(e.kind==='folder'?bd:mut); x.setLineDash(e.kind==='folder'?[4,4]:[]); x.lineWidth=(on?2:1)/G.k;
+    x.beginPath(); x.moveTo(s.x,s.y); x.lineTo(t.x,t.y); x.stroke(); }
+  x.setLineDash([]);
+  const showAll=G.k>0.6||G.nodes.length<45;
+  for(const n of G.nodes){ const r=nR(n), related=!hv||n===hv||nb.has(n.id), match=q&&nameKey(n.name).includes(q), dim=(hv&&!related)||(q&&!match);
+    x.globalAlpha=dim?.14:1; x.beginPath();
+    if(n.type==='folder') x.rect(n.x-r,n.y-r,r*2,r*2); else x.arc(n.x,n.y,r,0,6.2832);
+    if(n.type==='ghost'){ x.fillStyle='transparent'; x.strokeStyle=mut; x.setLineDash([3,3]); x.lineWidth=1.5/G.k; x.stroke(); x.setLineDash([]); }
+    else{ x.fillStyle=n.type==='folder'?mut:acc; x.fill(); }
+    if(n.id===state.activeId){ x.strokeStyle=txt; x.lineWidth=2/G.k; x.beginPath(); x.arc(n.x,n.y,r+3,0,6.2832); x.stroke(); }
+    if(match){ x.strokeStyle=txt; x.lineWidth=2/G.k; x.beginPath(); x.arc(n.x,n.y,r+5,0,6.2832); x.stroke(); }
+    if(showAll||n===hv||(hv&&nb.has(n.id))||match){ x.globalAlpha=dim?.2:1; x.fillStyle=txt; x.font=`${12/G.k}px Vazirmatn,Tahoma,sans-serif`; x.textAlign='center'; x.fillText(n.name.length>26?n.name.slice(0,25)+'…':n.name,n.x,n.y+r+13/G.k); } }
+  x.restore(); x.globalAlpha=1;
+}
+function gSize(){ const dpr=devicePixelRatio||1, r=G.cv.getBoundingClientRect(); G.cv.width=Math.max(1,r.width*dpr); G.cv.height=Math.max(1,r.height*dpr); }
+function gLoop(){ if(!G.on) return; gStep(); gDraw(); requestAnimationFrame(gLoop); }
+const gWorld=e=>{ const r=G.cv.getBoundingClientRect(); return {x:(e.clientX-r.left-r.width/2-G.tx)/G.k,y:(e.clientY-r.top-r.height/2-G.ty)/G.k}; };
+function gHit(e){ const w=gWorld(e); let best=null,bd=1e9; for(const n of G.nodes){ const d=Math.hypot(n.x-w.x,n.y-w.y); if(d<nR(n)+4/G.k&&d<bd){ best=n; bd=d; } } return best; }
+async function gOpen(n){
+  if(n.type==='folder') return;
+  if(n.type==='ghost'){ const cur=state.nodes.find(x=>x.id===state.activeId); const nn=await createNode('note',n.name,cur?cur.parentId:null); renderTree(); closeGraph(); openNote(nn.id); toast('یادداشت «'+n.name+'» ساخته شد ✨'); return; }
+  closeGraph(); openNote(n.id);
+}
+G.cv.addEventListener('pointerdown',e=>{ const h=gHit(e); G.down={x:e.clientX,y:e.clientY,moved:false}; if(h){ G.drag=h; G.alpha=Math.max(G.alpha,.3); } else G.pan={tx:G.tx,ty:G.ty,x:e.clientX,y:e.clientY}; G.cv.setPointerCapture(e.pointerId); });
+G.cv.addEventListener('pointermove',e=>{
+  if(G.down&&Math.abs(e.clientX-G.down.x)+Math.abs(e.clientY-G.down.y)>4) G.down.moved=true;
+  if(G.drag){ const w=gWorld(e); G.drag.x=w.x; G.drag.y=w.y; G.drag.vx=G.drag.vy=0; G.alpha=Math.max(G.alpha,.3); }
+  else if(G.pan){ G.tx=G.pan.tx+e.clientX-G.pan.x; G.ty=G.pan.ty+e.clientY-G.pan.y; }
+  else{ G.hover=gHit(e); G.cv.style.cursor=G.hover?'pointer':'grab'; } });
+G.cv.addEventListener('pointerup',e=>{ const d=G.drag; if(d&&G.down&&!G.down.moved) gOpen(d); G.drag=G.pan=G.down=null; });
+G.cv.addEventListener('pointerleave',()=>{ if(!G.drag&&!G.pan) G.hover=null; });
+G.cv.addEventListener('wheel',e=>{ e.preventDefault(); const r=G.cv.getBoundingClientRect(), sx=e.clientX-r.left-r.width/2, sy=e.clientY-r.top-r.height/2;
+  const k=Math.min(4,Math.max(.15,G.k*Math.exp(-e.deltaY*0.0015))), wx=(sx-G.tx)/G.k, wy=(sy-G.ty)/G.k; G.tx=sx-wx*k; G.ty=sy-wy*k; G.k=k; },{passive:false});
+const gRe=()=>{ G.o.orph=gv.querySelector('#gvOrph').checked; G.o.ghost=gv.querySelector('#gvGhost').checked; G.o.fold=gv.querySelector('#gvFold').checked; G.o.local=gv.querySelector('#gvLocal').checked; G.o.depth=+gv.querySelector('#gvDepth').value; graphBuild(); };
+['#gvOrph','#gvGhost','#gvFold','#gvLocal','#gvDepth'].forEach(s=>gv.querySelector(s).addEventListener('change',gRe));
+gv.querySelector('#gvQ').addEventListener('input',e=>{ G.q=e.target.value; });
+gv.querySelector('#gvClose').onclick=()=>closeGraph();
+window.openGraph=function(){ flushSave(); gv.classList.add('show'); G.on=true; G.k=1; G.tx=G.ty=0; gv.querySelector('#gvLocal').disabled=!state.activeId; if(!state.activeId){ gv.querySelector('#gvLocal').checked=false; } gSize(); gRe(); requestAnimationFrame(gLoop); };
+window.closeGraph=function(){ G.on=false; gv.classList.remove('show'); };
+addEventListener('resize',()=>{ if(G.on) gSize(); });
+document.addEventListener('keydown',e=>{ if(G.on&&e.key==='Escape') closeGraph(); });
+$('btnGraph').onclick=()=>G.on?closeGraph():openGraph();
+
+/* ---- تمام‌صفحه (بدون هیچ نوار مرورگر) ---- */
+const fsOn=()=>!!document.fullscreenElement;
+function toggleFs(){ try{ fsOn()?document.exitFullscreen():document.documentElement.requestFullscreen(); }catch(e){ toast('مرورگر اجازهٔ تمام‌صفحه نداد'); } }
+$('btnFs').onclick=toggleFs;
+document.addEventListener('fullscreenchange',()=>{ $('btnFs').textContent=fsOn()?'🗗':'⛶'; $('btnFs').title=fsOn()?'خروج از تمام‌صفحه (Esc / F11)':'تمام‌صفحه (F11)'; });
+const autoFs=$('autoFs'); autoFs.checked=localStorage.getItem('mn-autofs')==='1';
+autoFs.onchange=()=>{ localStorage.setItem('mn-autofs',autoFs.checked?'1':'0'); if(autoFs.checked&&!fsOn()) toggleFs(); };
+if(autoFs.checked){ const go=()=>{ removeEventListener('pointerdown',go,true); removeEventListener('keydown',go,true); if(!fsOn()) document.documentElement.requestFullscreen().catch(()=>{}); };
+  addEventListener('pointerdown',go,true); addEventListener('keydown',go,true); }
 
 /* ---------- 40) شروع بخش ۳ (بعد از بوت) ---------- */
 window.afterBoot=function(){ vInit();

@@ -73,6 +73,7 @@
 [data-skin="sage"]{--bg:#f6f9f2;--panel:#e8f0df;--panel2:#d9e6cc;--border:#c2d6ae;--text:#1f2e12;--muted:#6a8250;--accent:#4d7c0f;--hover:#e0ebd3;--code-bg:#e4eed9}
 /* ===== صفحهٔ ورودی ===== */
 .main.is-home .doc{display:none}
+body:has(.main.is-home) #bhandle,body:has(.main.is-home) #ftb,body:has(.main.is-home) #slash{display:none!important}
 .main:not(.is-home) .home{display:none}
 .home{min-height:calc(100vh - 52px);padding:44px 20px 80px;position:relative;overflow:hidden;
   background:radial-gradient(900px 420px at 50% -8%,color-mix(in srgb,var(--accent) 24%,transparent),transparent 70%),
@@ -1873,9 +1874,10 @@ window.renderHome=function(){
   $('hSkins').innerHTML='<div class="sk-title">🌙 حالت‌های شب ('+fa(10)+')</div><div class="skins">'+sk('dark')+'</div><div class="sk-title" style="margin-top:14px">☀️ حالت‌های روز ('+fa(10)+')</div><div class="skins">'+sk('light')+'</div>';
 };
 $('home').addEventListener('click',e=>{
-  const sk=e.target.closest('[data-skin]'); if(sk){ state.skin=sk.dataset.skin; applyTheme(); return; }
-  const k=e.target.closest('[data-k]'); if(k){ const b=$(k.dataset.k); if(b) b.click(); return; }
-  const r=e.target.closest('[data-id]'); if(r) openNote(r.dataset.id);
+  /* مهم: <html> هم خودش data-skin دارد؛ پس فقط داخل خود #home و با کلاس مشخص جست‌وجو می‌کنیم */
+  const sk=e.target.closest('#home button.skin'); if(sk){ state.skin=sk.dataset.skin; applyTheme(); return; }
+  const k=e.target.closest('#home button[data-k]'); if(k){ const b=$(k.dataset.k); if(b) b.click(); else toast('این بخش هنوز آماده نیست'); return; }
+  const r=e.target.closest('#home .rrow, #home #hCont'); if(r&&r.dataset.id) openNote(r.dataset.id);
 });
 $('hNew').onclick=()=>$('btnNewNote').click();
 $('btnHome').onclick=()=>openNote(null);
@@ -1933,7 +1935,10 @@ function homeGreet(){
   $('gHello').textContent=g; $('gDate').textContent='📅 '+P.weekday+' '+P.day+' '+P.month+' '+P.year;
   $('gTime').textContent='🕒 '+d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
 }
-setInterval(()=>{ if(state.activeId===null) homeGreet(); },20000);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal-bg.show').forEach(m=>m.classList.remove('show')); });
+const _rtH=renderTree;
+renderTree=function(){ const r=_rtH.apply(this,arguments); if(state.activeId===null&&window.renderHome) renderHome(); return r; };
+setInterval(()=>{ if(state.activeId===null){ homeGreet(); if(window.renderHome) renderHome(); } },20000);
 
 /* ---------- 40) شروع بخش ۳ (بعد از بوت) ---------- */
 window.afterBoot=function(){ vInit();

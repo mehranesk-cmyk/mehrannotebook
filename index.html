@@ -61,6 +61,16 @@
 [data-skin="mint"]{--bg:#f3fcf8;--panel:#e4f6ee;--panel2:#d3efe3;--border:#b9e2d0;--text:#10342a;--muted:#4f8a76;--accent:#059669;--hover:#dbf2e8;--code-bg:#e1f4eb}
 [data-skin="sky"]{--bg:#f2f8ff;--panel:#e5f0fd;--panel2:#d5e6fb;--border:#bcd5f3;--text:#10243d;--muted:#55789f;--accent:#2563eb;--hover:#dbe9fb;--code-bg:#e2edfb}
 
+[data-skin="amber"]{--bg:#1a1408;--panel:#231b0b;--panel2:#2f2410;--border:#4a3a17;--text:#fdf3dc;--muted:#b9a577;--accent:#f59e0b;--hover:#3a2d12;--code-bg:#2a2110}
+[data-skin="teal"]{--bg:#071a1a;--panel:#0b2424;--panel2:#103232;--border:#1a4d4d;--text:#e0f7f5;--muted:#7fb5b0;--accent:#2dd4bf;--hover:#123b3b;--code-bg:#0e2b2b}
+[data-skin="midnight"]{--bg:#0b0d1f;--panel:#11142b;--panel2:#181c3d;--border:#272d63;--text:#e8eafc;--muted:#8e95c9;--accent:#818cf8;--hover:#1e2350;--code-bg:#151937}
+[data-skin="magenta"]{--bg:#1c0e1b;--panel:#26132a;--panel2:#33193a;--border:#5a2a63;--text:#fce8fb;--muted:#c18cc7;--accent:#e879f9;--hover:#40204a;--code-bg:#2d1632}
+[data-skin="coffee"]{--bg:#181210;--panel:#211915;--panel2:#2d2320;--border:#4a3b34;--text:#f5ebe4;--muted:#b09a8d;--accent:#d6a06b;--hover:#382c27;--code-bg:#271e1a}
+[data-skin="lavender"]{--bg:#faf7ff;--panel:#f1eafd;--panel2:#e6dbfb;--border:#d5c6f3;--text:#2a1850;--muted:#7a63a8;--accent:#7c3aed;--hover:#ece3fc;--code-bg:#efe7fc}
+[data-skin="peach"]{--bg:#fff8f3;--panel:#ffeee3;--panel2:#ffe0cd;--border:#f7cfb6;--text:#40210f;--muted:#a06a4c;--accent:#ea580c;--hover:#ffe8d9;--code-bg:#ffeadc}
+[data-skin="lemon"]{--bg:#fefdf0;--panel:#faf7d2;--panel2:#f3efb4;--border:#e5df97;--text:#36330a;--muted:#8a8444;--accent:#a16207;--hover:#f7f3c3;--code-bg:#f6f2c4}
+[data-skin="aqua"]{--bg:#f1fcfd;--panel:#def6f9;--panel2:#c9eef3;--border:#a8e0e8;--text:#0b3038;--muted:#4f8f9b;--accent:#0891b2;--hover:#d3f1f5;--code-bg:#d9f3f6}
+[data-skin="sage"]{--bg:#f6f9f2;--panel:#e8f0df;--panel2:#d9e6cc;--border:#c2d6ae;--text:#1f2e12;--muted:#6a8250;--accent:#4d7c0f;--hover:#e0ebd3;--code-bg:#e4eed9}
 /* ===== صفحهٔ ورودی ===== */
 .main.is-home .doc{display:none}
 .main:not(.is-home) .home{display:none}
@@ -69,10 +79,26 @@
              radial-gradient(500px 300px at 8% 90%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
 .home-in{max-width:980px;margin:0 auto;position:relative;z-index:1}
 .hero{text-align:center;padding:12px 0 26px}
-.logo-badge{display:inline-grid;place-items:center;width:104px;height:104px;border-radius:30px;background:color-mix(in srgb,var(--accent) 16%,var(--panel));border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:0 14px 40px color-mix(in srgb,var(--accent) 30%,transparent);animation:floaty 5s ease-in-out infinite}
+.logo-badge{display:inline-grid;place-items:center;width:104px;height:104px;border-radius:30px;background:color-mix(in srgb,var(--accent) 16%,var(--panel));border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:0 14px 40px color-mix(in srgb,var(--accent) 30%,transparent)}
 .hero h1{margin:18px 0 6px;font-size:clamp(26px,5vw,44px);line-height:1.5;font-weight:800;color:var(--text)}
-.hero h1 .emo{display:inline-block;animation:floaty 4s ease-in-out infinite}
-.hero .sub{margin:0 0 22px;color:var(--muted);font-size:15px}
+.hero h1 .h-emo{display:inline-block}
+.g-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 22px}
+.g-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;font-size:14px;background:color-mix(in srgb,var(--accent) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));color:var(--text);white-space:nowrap}
+.g-chip.g-a{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 85%,#000),color-mix(in srgb,var(--accent) 55%,#ff7ab8));color:#fff;border-color:transparent;font-weight:700}
+.sk-title{font-size:13px;color:var(--muted);margin:8px 2px 8px}
+#btnOpenSb{display:none}.sidebar.collapsed ~ .main #btnOpenSb{display:grid}
+.picker{position:fixed;z-index:80;display:none;width:352px;max-width:96vw;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
+.picker.show{display:block}
+.pk-tabs{display:flex;gap:2px;padding:6px;border-bottom:1px solid var(--border);overflow-x:auto}
+.pk-tab{min-width:34px;height:32px;border-radius:9px;font-size:17px;color:var(--muted);flex:none}
+.pk-tab.on{background:var(--panel2);outline:1px solid var(--accent);color:var(--text)}
+.pk-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;padding:8px;height:250px;overflow:auto;align-content:start}
+.pk-grid button{height:38px;border-radius:8px;font-size:23px;display:grid;place-items:center;line-height:1;color:var(--text)}
+.pk-grid button:hover{background:var(--hover)}
+.pk-grid.ic{grid-template-columns:repeat(6,1fr)}.pk-grid.ic button{font-size:22px}
+.pk-note{padding:6px 10px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--border)}
+.mi{vertical-align:-0.18em}
+
 .cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .btn-big{padding:13px 26px;border-radius:14px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 38%,transparent)}
 .btn-big:hover{filter:brightness(1.1)}
@@ -93,7 +119,7 @@
 .skin{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 10px;border-radius:14px;border:2px solid transparent;font-size:12.5px;color:var(--muted)}
 .skin i{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);display:block}
 .skin:hover{background:var(--hover)}.skin.on{border-color:var(--accent);color:var(--text)}
-.deco{position:absolute;font-size:34px;opacity:.16;animation:floaty 6s ease-in-out infinite;pointer-events:none}
+.deco{position:absolute;font-size:34px;opacity:.14;pointer-events:none}
 .muted{color:var(--muted)}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
@@ -320,7 +346,9 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
   <main class="main">
     <div class="topbar">
       <div style="display:flex;gap:6px">
+        <button class="icon-btn" id="btnOpenSb" title="باز کردن سایدبار (Ctrl+B)">▤</button>
         <button class="icon-btn" id="btnHome" title="صفحهٔ اصلی">🏠</button>
+        <button class="icon-btn" id="btnEmoji" title="ایموجی، آیکون و نماد">😀</button>
         <button class="icon-btn" id="btnTheme" title="تاریک / روشن">🌙</button>
         <button class="icon-btn" id="btnExport" title="خروجی">⤓</button>
         <button class="icon-btn" id="btnToc" title="فهرست مطالب">☰</button>
@@ -333,8 +361,8 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
       <div class="home-in">
         <div class="hero">
           <div class="logo-badge"><svg viewBox="0 0 64 64" width="74" height="74" aria-hidden="true"><defs><linearGradient id="lgH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="#ff7ab8"/></linearGradient></defs><rect x="10" y="6" width="44" height="52" rx="9" fill="url(#lgH)"/><rect x="16" y="6" width="5" height="52" fill="rgba(0,0,0,.18)"/><path d="M28 22h18M28 30h18M28 38h12" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M44 44l8-8 4 4-8 8-5 1z" fill="#fff"/></svg></div>
-          <h1><span class="emo">📓</span> دفترچه یادداشت برداری مهران <span class="emo" style="animation-delay:1s">✨</span></h1>
-          <p class="sub" id="homeSub"></p>
+          <h1><span class="h-emo">📓</span> دفترچه یادداشت برداری مهران <span class="h-emo">✨</span></h1>
+          <div class="g-row"><span class="g-chip g-a" id="gHello"></span><span class="g-chip" id="gDate"></span><span class="g-chip" id="gTime"></span></div>
           <div class="cta"><button class="btn-big" id="hNew">✍️ یادداشت جدید</button><button class="btn-ghost" id="hCont" data-id="" style="display:none"></button></div>
         </div>
         <div class="stats">
@@ -351,7 +379,7 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
             <button data-k="btnVault">📂 پوشهٔ دفتر</button><button data-k="btnBackup">💾 پشتیبان</button>
             <button data-k="btnTrash">🗑 سطل زباله</button><button data-k="btnToc">☰ فهرست مطالب</button></div></div>
         </div>
-        <div class="hcard"><h3>🎨 رنگ دفتر</h3><div class="skins" id="hSkins"></div></div>
+        <div class="hcard"><h3>🎨 رنگ دفتر</h3><div id="hSkins"></div></div>
       </div>
     </section>
     <div class="doc" id="doc">
@@ -443,7 +471,11 @@ const SKINS={
   ocean:{n:'اقیانوس',b:'dark',c:'#38bdf8',p:'#0a1626'}, forest:{n:'جنگل',b:'dark',c:'#34d399',p:'#0a1812'},
   sunset:{n:'غروب',b:'dark',c:'#fb7185',p:'#1a0f1e'}, royal:{n:'شاهانه',b:'dark',c:'#a78bfa',p:'#120e22'},
   rose:{n:'گل رز',b:'light',c:'#e11d73',p:'#fff7f9'}, sand:{n:'شنی',b:'light',c:'#d97706',p:'#fffaf0'},
-  mint:{n:'نعنایی',b:'light',c:'#059669',p:'#f3fcf8'}, sky:{n:'آسمانی',b:'light',c:'#2563eb',p:'#f2f8ff'}};
+  mint:{n:'نعنایی',b:'light',c:'#059669',p:'#f3fcf8'}, sky:{n:'آسمانی',b:'light',c:'#2563eb',p:'#f2f8ff'},
+  amber:{n:'کهربایی',b:'dark',c:'#f59e0b',p:'#1a1408'}, teal:{n:'فیروزه‌ای',b:'dark',c:'#2dd4bf',p:'#071a1a'},
+  midnight:{n:'نیمه‌شب',b:'dark',c:'#818cf8',p:'#0b0d1f'}, magenta:{n:'ارغوانی',b:'dark',c:'#e879f9',p:'#1c0e1b'}, coffee:{n:'قهوه‌ای',b:'dark',c:'#d6a06b',p:'#181210'},
+  lavender:{n:'اسطوخودوس',b:'light',c:'#7c3aed',p:'#faf7ff'}, peach:{n:'هلویی',b:'light',c:'#ea580c',p:'#fff8f3'},
+  lemon:{n:'لیمویی',b:'light',c:'#a16207',p:'#fefdf0'}, aqua:{n:'آبی یخی',b:'light',c:'#0891b2',p:'#f1fcfd'}, sage:{n:'مریم‌گلی',b:'light',c:'#4d7c0f',p:'#f6f9f2'}};
 const state={nodes:[],activeId:null,theme:localStorage.getItem('mn-theme')||'dark',skin:localStorage.getItem('mn-skin')||null};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const now=()=>Date.now();
@@ -488,7 +520,7 @@ function applyTheme(){
   const sk=SKINS[state.skin]?state.skin:(SKINS[state.theme]?state.theme:'dark'); state.skin=sk; state.theme=SKINS[sk].b;
   document.documentElement.dataset.theme=state.theme; document.documentElement.dataset.skin=sk;
   document.getElementById('btnTheme').textContent=state.theme==='dark'?'☀️':'🌙';
-  localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk);
+  localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk); localStorage.setItem('mn-skin-'+state.theme,sk);
   const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.setAttribute('content',SKINS[sk].c);
   if(window.renderHome&&state.activeId===null) renderHome();
 }
@@ -561,7 +593,7 @@ const SLASH_GROUPS=[
   {g:'اخیراً استفاده شده',items:[['divider','—','جداکننده'],['codeblock','<>','بلوک کد'],['inlinecode','<>','کد درون‌خطی'],['ul','≡','لیست نقطه‌ای'],['toggle','▤','لیست بازشو'],['p','¶','متن ساده']]},
   {g:'پرکاربرد',items:[['center','≡','وسط‌چین'],['right','≡','راست‌چین'],['warn','⚠','بنر هشدار'],['quote','❝','بلوک نقل قول'],['h1','H1','عنوان ۱'],['table','▦','جدول']]},
   {g:'متن',items:[['h2','H2','عنوان ۲'],['h3','H3','عنوان ۳'],['h4','H4','عنوان ۴'],['ol','1.','لیست شماره‌دار'],['check','☑','چک‌لیست']]},
-  {g:'درون‌خطی',items:[['emoji','☺','ایموجی'],['mention','@','اشاره به شخص'],['task','☑','اشاره به وظیفه'],['pagelink','🔗','اشاره به صفحه']]},
+  {g:'درون‌خطی',items:[['emoji','☺','ایموجی'],['icons','★','آیکون و نماد'],['mention','@','اشاره به شخص'],['task','☑','اشاره به وظیفه'],['pagelink','🔗','اشاره به صفحه']]},
   {g:'قالب‌بندی',items:[['bold','T','متن ضخیم'],['italic','T','متن مورب'],['underline','U','زیرخط'],['strike','S','خط خورده'],['link','🔗','پیوند'],['color','T','رنگ متن'],['highlight','🖍','هایلایت'],['badge','🏷','بج'],['clear','—','پاک کردن قالب'],['left','≡','چپ‌چین']]},
   {g:'رسانه',items:[['embed','▶','رسانه درون‌خطی'],['video','🎬','ویدیو'],['audio','🎧','صدا']]},
   {g:'افزودن',items:[['import','⬆','وارد کردن فایل']]},
@@ -617,7 +649,7 @@ function ask(title,val=''){
 }
 
 /* ===================== 9) WIRING ===================== */
-document.getElementById('btnTheme').onclick=()=>{state.skin=state.theme==='dark'?'light':'dark';applyTheme()};
+document.getElementById('btnTheme').onclick=()=>{const o=state.theme==='dark'?'light':'dark'; state.skin=localStorage.getItem('mn-skin-'+o)||o; applyTheme()};
 document.getElementById('btnToggleSb').onclick=()=>document.getElementById('sidebar').classList.toggle('collapsed');
 document.getElementById('btnNewFolder').onclick=async()=>{const v=await ask('نام فولدر');if(v){await createNode('folder',v,null);renderTree();}};
 document.getElementById('btnNewNote').onclick=async()=>{const v=await ask('عنوان یادداشت');if(v){const n=await createNode('note',v,state.folderCtx||null);renderTree();openNote(n.id);}};
@@ -1832,13 +1864,13 @@ window.renderHome=function(){
   const notes=state.nodes.filter(n=>n.type==='note'&&!n.deleted), folders=state.nodes.filter(n=>n.type==='folder'&&!n.deleted);
   const tags=new Set(); notes.forEach(n=>(n.tags||[]).forEach(t=>tags.add(String(t&&t.name||t))));
   const words=notes.reduce((s,n)=>s+(n.content||'').replace(/<[^>]*>/g,' ').split(/\s+/).filter(Boolean).length,0);
-  const hr=new Date().getHours(), g=hr<5?'شب بخیر 🌙':hr<12?'صبح بخیر ☀️':hr<17?'ظهر بخیر 🌤':hr<20?'عصر بخیر 🌇':'شب بخیر 🌙';
-  $('homeSub').textContent=g+' · '+new Date().toLocaleDateString('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  homeGreet();
   $('stNotes').textContent=fa(notes.length); $('stFolders').textContent=fa(folders.length); $('stTags').textContent=fa(tags.size); $('stWords').textContent=fa(words);
   const rec=[...notes].sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)).slice(0,6);
   $('hRecent').innerHTML=rec.length?rec.map(n=>`<div class="rrow" data-id="${n.id}"><span>📄</span><b>${escapeHtml(n.name)}</b><small>${escapeHtml(pathOf(n))}</small></div>`).join(''):'<p class="muted">هنوز یادداشتی نداری؛ از «یادداشت جدید» شروع کن ✍️</p>';
   const ln=notes.find(n=>n.id===localStorage.getItem('mn-last')); $('hCont').style.display=ln?'':'none'; if(ln){ $('hCont').dataset.id=ln.id; $('hCont').textContent='📖 ادامه: '+ln.name.slice(0,22); }
-  $('hSkins').innerHTML=Object.entries(SKINS).map(([k,s])=>`<button class="skin${k===state.skin?' on':''}" data-skin="${k}" title="${s.n}"><i style="background:linear-gradient(135deg,${s.p} 50%,${s.c} 50%)"></i><span>${s.n}</span></button>`).join('');
+  const sk=b=>Object.entries(SKINS).filter(([k,s])=>s.b===b).map(([k,s])=>`<button class="skin${k===state.skin?' on':''}" data-skin="${k}" title="${s.n}"><i style="background:linear-gradient(135deg,${s.p} 50%,${s.c} 50%)"></i><span>${s.n}</span></button>`).join('');
+  $('hSkins').innerHTML='<div class="sk-title">🌙 حالت‌های شب ('+fa(10)+')</div><div class="skins">'+sk('dark')+'</div><div class="sk-title" style="margin-top:14px">☀️ حالت‌های روز ('+fa(10)+')</div><div class="skins">'+sk('light')+'</div>';
 };
 $('home').addEventListener('click',e=>{
   const sk=e.target.closest('[data-skin]'); if(sk){ state.skin=sk.dataset.skin; applyTheme(); return; }
@@ -1847,6 +1879,61 @@ $('home').addEventListener('click',e=>{
 });
 $('hNew').onclick=()=>$('btnNewNote').click();
 $('btnHome').onclick=()=>openNote(null);
+
+
+/* =====================================================================
+   43) انتخاب‌گر ایموجی، آیکون و نماد (در متن)
+   ===================================================================== */
+const EMO={faces:"😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯😰😱😲😳😴😵😶😷😸😹😺😻😼😽😾😿🙀🙁🙂🙃🙄🙅🙆🙇🙈🙉🙊🙋🙌🙍🙎🙏🤐🤑🤒🤓🤔🤕🤖🤗🤘🤙🤚🤛🤜🤝🤞🤟🤠🤡🤢🤣🤤🤥🤦🤧🤨🤩🤪🤫🤬🤭🤮🤯🤰🤱🤲🤳🤴🤵🤶🤷🤸🤹🤺🥰🥱🥲🥳🥴🥵🥶🥷🥸🥹🥺🧐🧑🧒🧓🧔🧕🧖🧗🧘🧙🧚🧛🧜🧝🧞🧟🫠🫡🫢🫣🫤🫥🫦🫧🫨👀👁️👂👃👄👅👆👇👈👉👊👋👌👍👎👏👐👦👧👨👩👪👫👬👭👮👯👰👱👲👳👴👵👶👷👸👹👺👻👼👽👾👿💀💁💂💃💄💅💆💇💪🕵️🕶️🕷️🕸️🕹️🕺🚶🛀🦰🦱🦲🦳🦴🦵🦶🦷🦸🦹🦺🦻🦼🦽🦾🦿☝️☹️☺️✊✋✌️✍️🗣️🤌🤍🤎🤏🧠🧡",animals:"🐀🐁🐂🐃🐄🐅🐆🐇🐈🐉🐊🐋🐌🐍🐎🐏🐐🐑🐒🐓🐔🐕🐖🐗🐘🐙🐚🐛🐜🐝🐞🐟🐠🐡🐢🐣🐤🐥🐦🐧🐨🐩🐪🐫🐬🐭🐮🐯🐰🐱🐲🐳🐴🐵🐶🐷🐸🐹🐺🐻🐼🐽🐾🐿️🦀🦁🦂🦃🦄🦅🦆🦇🦈🦉🦊🦋🦌🦍🦎🦏🦐🦑🦒🦓🦔🦕🦖🦗🦘🦙🦚🦛🦜🦝🦞🦟🦠🦡🦢🦣🦤🦥🦦🦧🦨🦩🦪🦫🦬🦭🦮🌰🌱🌲🌳🌴🌵🌶️🌷🌸🌹🌺🌻🌼🌽🌾🌿🍀🍁🍂🍃🍄💐💮🌈🌊🌋🌌🌑🌒🌓🌔🌕🌖🌗🌘🌙🌚🌛🌜🌝🌞🌟🌠🌤️🌥️🌦️🌧️🌨️🌩️🌪️🌫️🌬️☀️☁️☂️☃️☄️☔⚡⛄⛅❄️🔥💧💥💫☘️🪰🪱🪲🪳🪴🪵🪶🪷🪸🪹🪺🪻🪼🪽🪾🪿",food:"🍅🍆🍇🍈🍉🍊🍋🍌🍍🍎🍏🍐🍑🍒🍓🍔🍕🍖🍗🍘🍙🍚🍛🍜🍝🍞🍟🍠🍡🍢🍣🍤🍥🍦🍧🍨🍩🍪🍫🍬🍭🍮🍯🍰🍱🍲🍳🍴🍵🍶🍷🍸🍹🍺🍻🍼🍽️🍾🍿🥐🥑🥒🥓🥔🥕🥖🥗🥘🥙🥚🥛🥜🥝🥞🥟🥠🥡🥢🥣🥤🥥🥦🥧🥨🥩🥪🥫🥬🥭🥮🥯🧀🧁🧂🧃🧄🧅🧆🧇🧈🧉🧊🧋☕🫐🫑🫒🫓🫔🫕🫖🫗🫘🫙🫚🫛",activity:"🎀🎁🎂🎃🎄🎅🎆🎇🎈🎉🎊🎋🎌🎍🎎🎏🎐🎑🎒🎓🎠🎡🎢🎣🎤🎥🎦🎧🎨🎩🎪🎫🎬🎭🎮🎯🎰🎱🎲🎳🎴🎵🎶🎷🎸🎹🎺🎻🎼🎽🎾🎿🏀🏁🏂🏃🏄🏅🏆🏇🏈🏉🏊🏋️🏌️🏍️🏎️🥇🥈🥉🥊🥋🥌🥍🥎🥏⚽⚾⛳⛸️🧩🪀🪁🪂🤼🤽🤾🏏🏐🏑🏒🏓🏸🏹♟️🧿",travel:"🏔️🏕️🏖️🏗️🏘️🏙️🏚️🏛️🏜️🏝️🏞️🏟️🏠🏡🏢🏣🏤🏥🏦🏧🏨🏩🏪🏫🏬🏭🏮🏯🏰🚀🚁🚂🚃🚄🚅🚆🚇🚈🚉🚊🚋🚌🚍🚎🚏🚐🚑🚒🚓🚔🚕🚖🚗🚘🚙🚚🚛🚜🚝🚞🚟🚠🚡🚢🚣🚤🚥🚦🚧🚨🚩🚪🚫🚬🚭🚮🚯🚰🚱🚲🚳🚴🚵🚷🚸🚹🚺🚻🚼🚽🚾🚿🛁🛂🛃🛄🛅🛋️🛌🛍️🛎️🛏️🛐🛑🛒🛕🛖🛗🛠️🛡️🛢️🛣️🛤️🛥️🛩️🛫🛬🛰️🛳️🛴🛵🛶🛷🛸🛹🛺🛻🛼🗺️🗻🗼🗽🗾🗿🌍🌎🌏🌐✈️⛰️⛱️⛲⛴️⛵⛷️⛹️⛺⚓⛩️🧭🧳",objects:"💡💰💱💲💳💴💵💶💷💸💹💺💻💼💽💾💿📀📁📂📃📄📅📆📇📈📉📊📋📌📍📎📏📐📑📒📓📔📕📖📗📘📙📚📛📜📝📞📟📠📡📢📣📤📥📦📧📨📩📪📫📬📭📮📯📰📱📲📳📴📵📶📷📸📹📺📻📼📽️📿🔇🔈🔉🔊🔋🔌🔍🔎🔏🔐🔑🔒🔓🔔🔕🔖🔗🔘🔙🔚🔛🔜🔝🔞🔟🔠🔡🔢🔣🔤🔦🔧🔨🔩🔪🔫🔬🔭🔮🧢🧣🧤🧥🧦🧧🧨🧪🧫🧬🧮🧯🧰🧱🧲🧴🧵🧶🧷🧸🧹🧺🧻🧼🧽🧾⌚⌛⌨️⏰⏱️⏲️⏳🖥️🖨️🖱️🖲️🗂️🗃️🗄️🗑️🗒️🗓️🗜️🗝️🗞️🗡️⚒️⚔️⚕️⚖️⚗️⚙️⚰️⚱️⛏️⛑️⛓️✉️✏️✒️✂️🩰🩱🩲🩳🩴🩵🩶🩷🩸🩹🩺🩻🩼🪄🪅🪆🪇🪈🪉🪊🪎🪏🪐🪑🪒🪓🪔🪕🪖🪗🪘🪙🪚🪛🪜🪝🪞🪟🪠🪡🪢🪣🪤🪥🪦🪧🪨💉💊💋💌💍💎💣💨💩👑👒👓👔👕👖👗👘👙👚👛👜👝👞👟👠👡👢👣👤👥💈",symbols:"↔️↕️↖️↗️↘️↙️↩️↪️⏏️⏩⏪⏫⏬⏭️⏮️⏯️⏸️⏹️⏺️▪️▫️▶️◀️◻️◼️◽◾☎️☑️☠️☢️☣️☦️☪️☮️☯️☸️♀️♂️♈♉♊♋♌♍♎♏♐♑♒♓♠️♣️♥️♦️♨️♻️♾️♿⚛️⚜️⚠️⚧️⚪⚫⛈️⛎⛔⛪⛽✅✔️✖️✝️✡️✨✳️✴️❇️❌❎❓❔❕❗❣️❤️➕➖➗➡️➰➿⤴️⤵️⬅️⬆️⬇️⬛⬜⭐⭕🀄🃏🅰️🅱️🅾️🅿️🆎🆑🆒🆓🆔🆕🆖🆗🆘🆙🆚🈁🈂️🈚🈯🈲🈳🈴🈵🈶🈷️🈸🈹🈺🉐🉑🌀🌁🌂🌃🌄🌅🌆🌇🌉🌡️🌭🌮🌯🎖️🎗️🎙️🎚️🎛️🎞️🎟️🏳️🏴🏵️🏷️🏺💏💑💒💓💔💕💖💗💘💙💚💛💜💝💞💟💠💢💤💦💬💭💯🔀🔁🔂🔃🔄🔅🔆🔯🔰🔱🔲🔳🔴🔵🔶🔷🔸🔹🔺🔻🔼🔽🕉️🕊️🕋🕌🕍🕎🕐🕑🕒🕓🕔🕕🕖🕗🕘🕙🕚🕛🕜🕝🕞🕟🕠🕡🕢🕣🕤🕥🕦🕧🕯️🕰️🕳️🕴️🖇️🖊️🖋️🖌️🖍️🖐️🖕🖖🖤🖼️🗨️🗯️🗳️🛘🛜🛝🛞🛟🟠🟡🟢🟣🟤🟥🟦🟧🟨🟩🟪🟫🟰🤿🥀🥁🥂🥃🥄🥅🥻🥼🥽🥾🥿🦯🧌🧍🧎🧏🪃🪩🪪🪫🪬🪭🪮🪯🫀🫁🫂🫃🫄🫅🫆🫈🫍🫎🫏🫜🫟🫩🫪🫯🫰🫱🫲🫳🫴🫵🫶🫷🫸〰️〽️㊗️㊙️©️®️‼️⁉️™️ℹ️Ⓜ️",flags:"🏁🚩🎌🏴🏳️🇺🇳🇪🇺🇮🇷🇦🇫🇦🇱🇩🇿🇦🇩🇦🇴🇦🇷🇦🇲🇦🇺🇦🇹🇦🇿🇧🇭🇧🇩🇧🇾🇧🇪🇧🇷🇧🇬🇨🇦🇨🇱🇨🇳🇨🇴🇭🇷🇨🇺🇨🇾🇨🇿🇩🇰🇪🇬🇪🇪🇪🇹🇫🇮🇫🇷🇬🇪🇩🇪🇬🇭🇬🇷🇭🇺🇮🇸🇮🇳🇮🇩🇮🇶🇮🇪🇮🇱🇮🇹🇯🇵🇯🇴🇰🇿🇰🇪🇰🇼🇰🇬🇱🇻🇱🇧🇱🇾🇱🇹🇱🇺🇲🇾🇲🇽🇲🇦🇳🇱🇳🇿🇳🇬🇳🇴🇴🇲🇵🇰🇵🇸🇵🇪🇵🇭🇵🇱🇵🇹🇶🇦🇷🇴🇷🇺🇸🇦🇷🇸🇸🇬🇸🇰🇸🇮🇿🇦🇰🇷🇪🇸🇱🇰🇸🇪🇨🇭🇸🇾🇹🇯🇹🇭🇹🇳🇹🇷🇹🇲🇺🇦🇦🇪🇬🇧🇺🇸🇺🇿🇻🇪🇻🇳🇾🇪",};
+const ICONS={"ستاره": "<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>", "قلب": "<path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"/>", "تیک": "<polyline points=\"20 6 9 17 4 12\"/>", "ضربدر": "<line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/>", "هشدار": "<path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/>", "اطلاعات": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"12\" y1=\"16\" x2=\"12\" y2=\"12\"/><line x1=\"12\" y1=\"8\" x2=\"12.01\" y2=\"8\"/>", "زنگ": "<path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"/><path d=\"M13.73 21a2 2 0 0 1-3.46 0\"/>", "نشانک": "<path d=\"M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z\"/>", "تقویم": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/>", "ساعت": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>", "ابر": "<path d=\"M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z\"/>", "کد": "<polyline points=\"16 18 22 12 16 6\"/><polyline points=\"8 6 2 12 8 18\"/>", "فایل": "<path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/>", "پوشه": "<path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\"/>", "خانه": "<path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>", "پیوند": "<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>", "قفل": "<rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/>", "ایمیل": "<path d=\"M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z\"/><polyline points=\"22,6 12,13 2,6\"/>", "مکان": "<path d=\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>", "تلفن": "<path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\"/>", "جستجو": "<circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/>", "برچسب": "<path d=\"M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z\"/><line x1=\"7\" y1=\"7\" x2=\"7.01\" y2=\"7\"/>", "کاربر": "<path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>", "پرچم": "<path d=\"M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z\"/><line x1=\"4\" y1=\"22\" x2=\"4\" y2=\"15\"/>", "مداد": "<path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z\"/>", "سطل": "<polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6\"/><path d=\"M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2\"/>", "دانلود": "<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/>", "رعد": "<polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/>", "جهان": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"2\" y1=\"12\" x2=\"22\" y2=\"12\"/><path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"/>", "خورشید": "<circle cx=\"12\" cy=\"12\" r=\"5\"/><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"/><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"/><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"/><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"/><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"/><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"/><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"/><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"/>", "ماه": "<path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/>", "کتاب": "<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/>", "لامپ": "<path d=\"M9 18h6M10 22h4\"/><path d=\"M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z\"/>", "چک‌لیست": "<path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/><rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\"/><path d=\"M9 14l2 2 4-4\"/>", "چشم": "<path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "تصویر": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.5\"/><polyline points=\"21 15 16 10 5 21\"/>", "پخش": "<polygon points=\"5 3 19 12 5 21 5 3\"/>", "فلش چپ": "<line x1=\"19\" y1=\"12\" x2=\"5\" y2=\"12\"/><polyline points=\"12 19 5 12 12 5\"/>", "فلش راست": "<line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/><polyline points=\"12 5 19 12 12 19\"/>"};
+const SYMS="✓✔✗✘★☆♥♡♠♣♦♪♫☎✉✎✐✂⚙⚑⚐☑☐☒✪❖◆◇●○■□▲△▼▽▶◀◉◎➜➤➔➕➖✚✱✲✳❋☀☁☂☃☘☕♻⚓⚖⚠⚡⛔→←↑↓↔↕⇒⇐⇔⇧⇩↩↪↻≈≠≤≥∞√∑∏π°±×÷‰‹›«»“”„…†‡•·§¶©®™№℃℉½¼¾²³";
+const PTABS=[['recent','🕒','اخیراً استفاده‌شده'],['faces','😀','چهره‌ها و آدم‌ها'],['animals','🐶','حیوانات و طبیعت'],['food','🍔','خوراکی‌ها'],['activity','⚽','فعالیت‌ها'],['travel','🚗','سفر و مکان‌ها'],['objects','💡','اشیا'],['symbols','❤️','نمادها'],['flags','🏳️','پرچم‌ها'],['icons','★','آیکون‌ها'],['syms','Ω','نمادهای متنی']];
+let pickTab='faces';
+const seg=s=>(window.Intl&&Intl.Segmenter)?[...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(s)].map(x=>x.segment):(s.match(/\p{Extended_Pictographic}\uFE0F?|\p{Regional_Indicator}{2}|\S/gu)||[]);
+const getRecent=()=>{ try{ return JSON.parse(localStorage.getItem('mn-recent-emo')||'[]'); }catch(e){ return []; } };
+const pushRecent=x=>localStorage.setItem('mn-recent-emo',JSON.stringify([x,...getRecent().filter(y=>y!==x)].slice(0,32)));
+const svgOf=inner=>`<svg class="mi" viewBox="0 0 24 24" width="1.15em" height="1.15em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const pickerEl=document.createElement('div'); pickerEl.className='picker'; pickerEl.id='picker'; document.body.appendChild(pickerEl);
+function renderPicker(){
+  let grid;
+  if(pickTab==='icons') grid='<div class="pk-grid ic">'+Object.entries(ICONS).map(([n,s])=>`<button data-svg="${n}" title="${n}">${svgOf(s)}</button>`).join('')+'</div>';
+  else{ const list=pickTab==='recent'?getRecent():pickTab==='syms'?seg(SYMS):seg(EMO[pickTab]||'');
+    grid='<div class="pk-grid">'+(list.length?list.map(x=>`<button data-t="${x}">${x}</button>`).join(''):'<p class="muted" style="grid-column:1/-1;text-align:center">هنوز چیزی انتخاب نکرده‌ای 🙂</p>')+'</div>'; }
+  pickerEl.innerHTML='<div class="pk-tabs">'+PTABS.map(([k,i,n])=>`<button class="pk-tab${k===pickTab?' on':''}" data-tab="${k}" title="${n}">${i}</button>`).join('')+'</div>'+grid+'<div class="pk-note">شکل ایموجی‌ها از سیستم‌عامل شما می‌آید (در آیفون و مک همان سبک Apple).</div>';
+}
+window.openPicker=function(x,y,tab){
+  if(!state.activeId) return toast('اول یه یادداشت باز کن ✍️');
+  if(tab) pickTab=tab; renderPicker(); pickerEl.classList.add('show');
+  pickerEl.style.left=Math.max(8,Math.min(x,innerWidth-pickerEl.offsetWidth-8))+'px';
+  pickerEl.style.top=Math.max(8,Math.min(y,innerHeight-pickerEl.offsetHeight-8))+'px';
+};
+pickerEl.addEventListener('mousedown',e=>e.preventDefault());
+pickerEl.addEventListener('click',e=>{
+  const tb=e.target.closest('[data-tab]'); if(tb){ pickTab=tb.dataset.tab; renderPicker(); return; }
+  const b=e.target.closest('[data-t],[data-svg]'); if(!b) return;
+  if(b.dataset.svg){ insertHTML(svgOf(ICONS[b.dataset.svg])+'&nbsp;'); }
+  else{ insertHTML(b.dataset.t); pushRecent(b.dataset.t); }
+  saveRange();
+});
+document.addEventListener('mousedown',e=>{ if(!pickerEl.contains(e.target)&&e.target.id!=='btnEmoji') pickerEl.classList.remove('show'); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') pickerEl.classList.remove('show'); });
+$('btnEmoji').onmousedown=e=>{ e.preventDefault(); saveRange(); };
+$('btnEmoji').onclick=e=>{ if(pickerEl.classList.contains('show')){ pickerEl.classList.remove('show'); return; } const r=e.currentTarget.getBoundingClientRect(); openPicker(r.left,r.bottom+6); };
+showEmoji=function(x,y){ openPicker(x,y,'faces'); };
+const _rb3=runBlockCommand2;
+runBlockCommand2=async function(k){
+  if(k==='icons'){ const r=savedRange?.getBoundingClientRect(); openPicker(r?r.left:200,r?r.bottom+6:200,'icons'); return; }
+  return _rb3(k);
+};
+/* فعال کردن دکمهٔ باز کردن سایدبار + ساعت زندهٔ صفحهٔ ورودی */
+$('btnOpenSb').onclick=()=>$('btnToggleSb').click();
+function homeGreet(){
+  const d=new Date(), hr=d.getHours(), g=hr<5?'شب بخیر 🌙':hr<12?'صبح بخیر ☀️':hr<17?'ظهر بخیر 🌤':hr<20?'عصر بخیر 🌇':'شب بخیر 🌙';
+  const P=Object.fromEntries(new Intl.DateTimeFormat('fa-IR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));
+  $('gHello').textContent=g; $('gDate').textContent='📅 '+P.weekday+' '+P.day+' '+P.month+' '+P.year;
+  $('gTime').textContent='🕒 '+d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(()=>{ if(state.activeId===null) homeGreet(); },20000);
 
 /* ---------- 40) شروع بخش ۳ (بعد از بوت) ---------- */
 window.afterBoot=function(){ vInit();

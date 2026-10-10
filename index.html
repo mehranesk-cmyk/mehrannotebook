@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دفتر یادداشت برداری مهران</title>
+<title>📓 دفترچه یادداشت برداری مهران</title>
 
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#7c5cff">
@@ -52,6 +52,51 @@
   --text:#1b1b1f; --muted:#6b6b76; --accent:#6d4aff; --hover:#ececf1;
   --code-bg:#f1f1f4; --hl-yellow:#fde68a;
 }
+[data-skin="ocean"]{--bg:#0a1626;--panel:#0e1f33;--panel2:#142b45;--border:#1d3a5c;--text:#e6f1fb;--muted:#8aa6c4;--accent:#38bdf8;--hover:#17304d;--code-bg:#112742}
+[data-skin="forest"]{--bg:#0a1812;--panel:#0f2219;--panel2:#153023;--border:#1f4030;--text:#e5f4ec;--muted:#86a897;--accent:#34d399;--hover:#173528;--code-bg:#12291e}
+[data-skin="sunset"]{--bg:#1a0f1e;--panel:#231428;--panel2:#301b36;--border:#4a2a50;--text:#fbe9ee;--muted:#b78fa0;--accent:#fb7185;--hover:#3a2140;--code-bg:#2b1a31}
+[data-skin="royal"]{--bg:#120e22;--panel:#1a1432;--panel2:#241c45;--border:#372b66;--text:#ece8fb;--muted:#9d93c7;--accent:#a78bfa;--hover:#2b2250;--code-bg:#201a3d}
+[data-skin="rose"]{--bg:#fff7f9;--panel:#ffeef3;--panel2:#ffdfe9;--border:#f6c9d8;--text:#3b1424;--muted:#9a5f74;--accent:#e11d73;--hover:#ffe3ec;--code-bg:#ffe9f0}
+[data-skin="sand"]{--bg:#fffaf0;--panel:#f8efdc;--panel2:#f1e4c8;--border:#e6d4ad;--text:#3a2a12;--muted:#8c7547;--accent:#d97706;--hover:#f4e8cf;--code-bg:#f5ead2}
+[data-skin="mint"]{--bg:#f3fcf8;--panel:#e4f6ee;--panel2:#d3efe3;--border:#b9e2d0;--text:#10342a;--muted:#4f8a76;--accent:#059669;--hover:#dbf2e8;--code-bg:#e1f4eb}
+[data-skin="sky"]{--bg:#f2f8ff;--panel:#e5f0fd;--panel2:#d5e6fb;--border:#bcd5f3;--text:#10243d;--muted:#55789f;--accent:#2563eb;--hover:#dbe9fb;--code-bg:#e2edfb}
+
+/* ===== صفحهٔ ورودی ===== */
+.main.is-home .doc{display:none}
+.main:not(.is-home) .home{display:none}
+.home{min-height:calc(100vh - 52px);padding:44px 20px 80px;position:relative;overflow:hidden;
+  background:radial-gradient(900px 420px at 50% -8%,color-mix(in srgb,var(--accent) 24%,transparent),transparent 70%),
+             radial-gradient(500px 300px at 8% 90%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%)}
+.home-in{max-width:980px;margin:0 auto;position:relative;z-index:1}
+.hero{text-align:center;padding:12px 0 26px}
+.logo-badge{display:inline-grid;place-items:center;width:104px;height:104px;border-radius:30px;background:color-mix(in srgb,var(--accent) 16%,var(--panel));border:1px solid color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:0 14px 40px color-mix(in srgb,var(--accent) 30%,transparent);animation:floaty 5s ease-in-out infinite}
+.hero h1{margin:18px 0 6px;font-size:clamp(26px,5vw,44px);line-height:1.5;font-weight:800;color:var(--text)}
+.hero h1 .emo{display:inline-block;animation:floaty 4s ease-in-out infinite}
+.hero .sub{margin:0 0 22px;color:var(--muted);font-size:15px}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-big{padding:13px 26px;border-radius:14px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 38%,transparent)}
+.btn-big:hover{filter:brightness(1.1)}
+.btn-ghost{padding:13px 22px;border-radius:14px;background:var(--panel);border:1px solid var(--border);font-size:14px}
+.btn-ghost:hover{border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 16px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+.stat .si{font-size:26px}.stat b{display:block;font-size:26px;margin:4px 0 0;color:var(--accent)}.stat small{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:12px}
+.hcard{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px}
+.hcard h3{margin:0 0 12px;font-size:15px}
+.rrow{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:10px;cursor:pointer}
+.rrow:hover{background:var(--hover)}.rrow b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rrow small{margin-inline-start:auto;color:var(--muted);white-space:nowrap}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.quick button{padding:11px 10px;border-radius:12px;background:var(--panel2);font-size:13.5px;text-align:center}
+.quick button:hover{background:var(--hover);outline:1px solid var(--accent)}
+.skins{display:flex;gap:10px;flex-wrap:wrap}
+.skin{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 10px;border-radius:14px;border:2px solid transparent;font-size:12.5px;color:var(--muted)}
+.skin i{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);display:block}
+.skin:hover{background:var(--hover)}.skin.on{border-color:var(--accent);color:var(--text)}
+.deco{position:absolute;font-size:34px;opacity:.16;animation:floaty 6s ease-in-out infinite;pointer-events:none}
+.muted{color:var(--muted)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--font)}
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -275,12 +320,40 @@ button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer
   <main class="main">
     <div class="topbar">
       <div style="display:flex;gap:6px">
+        <button class="icon-btn" id="btnHome" title="صفحهٔ اصلی">🏠</button>
         <button class="icon-btn" id="btnTheme" title="تاریک / روشن">🌙</button>
         <button class="icon-btn" id="btnExport" title="خروجی">⤓</button>
         <button class="icon-btn" id="btnToc" title="فهرست مطالب">☰</button>
       </div>
       <span class="save-state" id="saveState">ذخیره شد</span>
     </div>
+    <section class="home" id="home">
+      <span class="deco" style="top:8%;right:6%">📝</span><span class="deco" style="top:22%;left:7%;animation-delay:1s">📚</span>
+      <span class="deco" style="bottom:12%;right:10%;animation-delay:2s">💡</span><span class="deco" style="bottom:20%;left:12%;animation-delay:.5s">🗂️</span>
+      <div class="home-in">
+        <div class="hero">
+          <div class="logo-badge"><svg viewBox="0 0 64 64" width="74" height="74" aria-hidden="true"><defs><linearGradient id="lgH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="#ff7ab8"/></linearGradient></defs><rect x="10" y="6" width="44" height="52" rx="9" fill="url(#lgH)"/><rect x="16" y="6" width="5" height="52" fill="rgba(0,0,0,.18)"/><path d="M28 22h18M28 30h18M28 38h12" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M44 44l8-8 4 4-8 8-5 1z" fill="#fff"/></svg></div>
+          <h1><span class="emo">📓</span> دفترچه یادداشت برداری مهران <span class="emo" style="animation-delay:1s">✨</span></h1>
+          <p class="sub" id="homeSub"></p>
+          <div class="cta"><button class="btn-big" id="hNew">✍️ یادداشت جدید</button><button class="btn-ghost" id="hCont" data-id="" style="display:none"></button></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="si">📄</div><b id="stNotes">۰</b><small>یادداشت</small></div>
+          <div class="stat"><div class="si">📁</div><b id="stFolders">۰</b><small>فولدر</small></div>
+          <div class="stat"><div class="si">🏷</div><b id="stTags">۰</b><small>برچسب</small></div>
+          <div class="stat"><div class="si">✏️</div><b id="stWords">۰</b><small>کلمه</small></div>
+        </div>
+        <div class="grid2">
+          <div class="hcard"><h3>🕒 اخیراً ویرایش‌شده</h3><div id="hRecent"></div></div>
+          <div class="hcard"><h3>⚡ میان‌بُرها</h3><div class="quick">
+            <button data-k="btnSearch">🔍 جستجو</button><button data-k="btnNewFolder">📁 فولدر جدید</button>
+            <button data-k="btnImport">⬆ وارد کردن فایل</button><button data-k="btnSync">☁ همگام‌سازی</button>
+            <button data-k="btnVault">📂 پوشهٔ دفتر</button><button data-k="btnBackup">💾 پشتیبان</button>
+            <button data-k="btnTrash">🗑 سطل زباله</button><button data-k="btnToc">☰ فهرست مطالب</button></div></div>
+        </div>
+        <div class="hcard"><h3>🎨 رنگ دفتر</h3><div class="skins" id="hSkins"></div></div>
+      </div>
+    </section>
     <div class="doc" id="doc">
       <div class="doc-title" id="docTitle" contenteditable="true"></div>
       <div class="tags" id="docTags"></div>
@@ -365,7 +438,13 @@ async function requestPersistence(){
 }
 
 /* ===================== 2) STATE & MODEL ===================== */
-const state={nodes:[],activeId:null,theme:localStorage.getItem('mn-theme')||'dark'};
+const SKINS={
+  dark:{n:'سیاه',b:'dark',c:'#7c5cff',p:'#0f0f10'}, light:{n:'سفید',b:'light',c:'#6d4aff',p:'#ffffff'},
+  ocean:{n:'اقیانوس',b:'dark',c:'#38bdf8',p:'#0a1626'}, forest:{n:'جنگل',b:'dark',c:'#34d399',p:'#0a1812'},
+  sunset:{n:'غروب',b:'dark',c:'#fb7185',p:'#1a0f1e'}, royal:{n:'شاهانه',b:'dark',c:'#a78bfa',p:'#120e22'},
+  rose:{n:'گل رز',b:'light',c:'#e11d73',p:'#fff7f9'}, sand:{n:'شنی',b:'light',c:'#d97706',p:'#fffaf0'},
+  mint:{n:'نعنایی',b:'light',c:'#059669',p:'#f3fcf8'}, sky:{n:'آسمانی',b:'light',c:'#2563eb',p:'#f2f8ff'}};
+const state={nodes:[],activeId:null,theme:localStorage.getItem('mn-theme')||'dark',skin:localStorage.getItem('mn-skin')||null};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const now=()=>Date.now();
 
@@ -406,9 +485,12 @@ function downloadBackup(){
 
 /* ===================== 4) THEME ===================== */
 function applyTheme(){
-  document.documentElement.dataset.theme=state.theme;
+  const sk=SKINS[state.skin]?state.skin:(SKINS[state.theme]?state.theme:'dark'); state.skin=sk; state.theme=SKINS[sk].b;
+  document.documentElement.dataset.theme=state.theme; document.documentElement.dataset.skin=sk;
   document.getElementById('btnTheme').textContent=state.theme==='dark'?'☀️':'🌙';
-  localStorage.setItem('mn-theme',state.theme);
+  localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk);
+  const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.setAttribute('content',SKINS[sk].c);
+  if(window.renderHome&&state.activeId===null) renderHome();
 }
 
 /* ===================== 5) SIDEBAR TREE ===================== */
@@ -453,7 +535,8 @@ function openNote(id){
   $title.textContent=n?n.name:''; $editor.innerHTML=n?(n.content||'<p><br></p>'):'<p style="color:var(--muted)">یه یادداشت انتخاب کن یا بساز ✍️</p>';
   $editor.contentEditable=$title.contentEditable=!!n;
   renderTags();
-  localStorage.setItem('mn-last',id||''); renderTree();
+  if(id) localStorage.setItem('mn-last',id); renderTree();
+  document.querySelector('.main').classList.toggle('is-home',!n); if(!n&&window.renderHome) renderHome();
 }
 let dirtyId=null;
 async function flushSave(){
@@ -534,7 +617,7 @@ function ask(title,val=''){
 }
 
 /* ===================== 9) WIRING ===================== */
-document.getElementById('btnTheme').onclick=()=>{state.theme=state.theme==='dark'?'light':'dark';applyTheme()};
+document.getElementById('btnTheme').onclick=()=>{state.skin=state.theme==='dark'?'light':'dark';applyTheme()};
 document.getElementById('btnToggleSb').onclick=()=>document.getElementById('sidebar').classList.toggle('collapsed');
 document.getElementById('btnNewFolder').onclick=async()=>{const v=await ask('نام فولدر');if(v){await createNode('folder',v,null);renderTree();}};
 document.getElementById('btnNewNote').onclick=async()=>{const v=await ask('عنوان یادداشت');if(v){const n=await createNode('note',v,state.folderCtx||null);renderTree();openNote(n.id);}};
@@ -1741,6 +1824,30 @@ $('btnVault').onclick=async()=>{
 $('btnVault').oncontextmenu=async e=>{ e.preventDefault();
   if(VAULT.h&&confirm('اتصال با پوشهٔ «'+VAULT.h.name+'» قطع شود؟ هیچ فایل یا یادداشتی حذف نمی‌شود.')){ VAULT.h=null; VAULT.map={}; await dbDel('meta','vault'); vUi(); } };
 
+/* =====================================================================
+   42) صفحهٔ ورودی (داشبورد) + حالت‌های رنگی
+   ===================================================================== */
+window.renderHome=function(){
+  const h=$('home'); if(!h) return;
+  const notes=state.nodes.filter(n=>n.type==='note'&&!n.deleted), folders=state.nodes.filter(n=>n.type==='folder'&&!n.deleted);
+  const tags=new Set(); notes.forEach(n=>(n.tags||[]).forEach(t=>tags.add(String(t&&t.name||t))));
+  const words=notes.reduce((s,n)=>s+(n.content||'').replace(/<[^>]*>/g,' ').split(/\s+/).filter(Boolean).length,0);
+  const hr=new Date().getHours(), g=hr<5?'شب بخیر 🌙':hr<12?'صبح بخیر ☀️':hr<17?'ظهر بخیر 🌤':hr<20?'عصر بخیر 🌇':'شب بخیر 🌙';
+  $('homeSub').textContent=g+' · '+new Date().toLocaleDateString('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  $('stNotes').textContent=fa(notes.length); $('stFolders').textContent=fa(folders.length); $('stTags').textContent=fa(tags.size); $('stWords').textContent=fa(words);
+  const rec=[...notes].sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)).slice(0,6);
+  $('hRecent').innerHTML=rec.length?rec.map(n=>`<div class="rrow" data-id="${n.id}"><span>📄</span><b>${escapeHtml(n.name)}</b><small>${escapeHtml(pathOf(n))}</small></div>`).join(''):'<p class="muted">هنوز یادداشتی نداری؛ از «یادداشت جدید» شروع کن ✍️</p>';
+  const ln=notes.find(n=>n.id===localStorage.getItem('mn-last')); $('hCont').style.display=ln?'':'none'; if(ln){ $('hCont').dataset.id=ln.id; $('hCont').textContent='📖 ادامه: '+ln.name.slice(0,22); }
+  $('hSkins').innerHTML=Object.entries(SKINS).map(([k,s])=>`<button class="skin${k===state.skin?' on':''}" data-skin="${k}" title="${s.n}"><i style="background:linear-gradient(135deg,${s.p} 50%,${s.c} 50%)"></i><span>${s.n}</span></button>`).join('');
+};
+$('home').addEventListener('click',e=>{
+  const sk=e.target.closest('[data-skin]'); if(sk){ state.skin=sk.dataset.skin; applyTheme(); return; }
+  const k=e.target.closest('[data-k]'); if(k){ const b=$(k.dataset.k); if(b) b.click(); return; }
+  const r=e.target.closest('[data-id]'); if(r) openNote(r.dataset.id);
+});
+$('hNew').onclick=()=>$('btnNewNote').click();
+$('btnHome').onclick=()=>openNote(null);
+
 /* ---------- 40) شروع بخش ۳ (بعد از بوت) ---------- */
 window.afterBoot=function(){ vInit();
   if(localStorage.getItem('mn-toc')==='1') toggleToc(true);
@@ -1759,7 +1866,7 @@ window.afterBoot=function(){ vInit();
     const f1=await createNode('folder','۰۰ - آفیس'); const f2=await createNode('folder','۰۱ - کلاد');
     await createNode('note','آموزش های کلاد در مورد وردپرس - جدول و برچسب',f2.id);
   }
-  renderTree(); openNote(localStorage.getItem('mn-last')||null);
+  renderTree(); openNote(null);
   setInterval(makeBackup,5*60*1000);
   if(window.afterBoot) window.afterBoot();
 })();

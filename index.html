@@ -1931,7 +1931,9 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
 const VAULT={h:null,map:{},busy:false};
 const fsOk=!!window.showDirectoryPicker;
 const h53=s=>{let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^a>>>16,2246822507)^Math.imul(b^b>>>13,3266489909);b=Math.imul(b^b>>>16,2246822507)^Math.imul(a^a>>>13,3266489909);return (4294967296*(2097151&b)+(a>>>0)).toString(36)};
-const vName=s=>(s||'بدون عنوان').replace(/[\\/:*?"<>|#^\[\]]/g,'-').replace(/\s+/g,' ').trim().slice(0,80)||'بدون عنوان';
+const vName=s=>{ let n=(s||'بدون عنوان').replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u2069\uFEFF\uFE0E\uFE0F]/g,'')   /* نیم‌فاصله، علامت‌های جهت و کنترل: Chrome اجازه نمی‌دهد */
+    .replace(/[\\/:*?"<>|#^\[\]]/g,'-').replace(/\s+/g,' ').trim().replace(/[. ]+$/,'').slice(0,80).trim();
+  if(!n||/^(con|prn|aux|nul|com\d|lpt\d)$/i.test(n)) n=(n||'بدون عنوان')+'_'; return n; };
 const fmRe=/^---\r?\nmn-id: *([^\r\n]+)\r?\n---\r?\n/;
 const vSave=()=>dbPut('meta',{key:'vault',handle:VAULT.h,map:VAULT.map});
 async function vPerm(ask){ if(!VAULT.h) return false; const o={mode:'readwrite'};
@@ -1999,9 +2001,10 @@ async function vaultSync(manual){
       }
     }
     /* ۲) برنامه → پوشه */
-    for(const fo of state.nodes.filter(x=>x.type==='folder'&&!x.deleted)) await vDir(VAULT.h,vFolderPath(fo),true);
+    const fails=[];
+    for(const fo of state.nodes.filter(x=>x.type==='folder'&&!x.deleted)){ try{ await vDir(VAULT.h,vFolderPath(fo),true); }catch(e){ fails.push(fo.name+': '+e.message); } }
     const P=vPaths();
-    for(const n of state.nodes.filter(x=>x.type==='note')){
+    for(const n of state.nodes.filter(x=>x.type==='note')){ try{
       const rec=VAULT.map[n.id];
       if(n.deleted){ if(rec){ await vArchive(rec.path); delete VAULT.map[n.id]; out++; } continue; }
       const path=P[n.id];
@@ -2009,10 +2012,10 @@ async function vaultSync(manual){
       if(rec&&rec.path!==path){ const cur=await vRead(rec.path); if(cur!=null&&h53(cur)===rec.hash) await vArchive(rec.path); }
       const t=vText(n), mt=await vWrite(path,t);
       VAULT.map[n.id]={path,hash:h53(t),updatedAt:n.updatedAt,mtime:mt}; out++;
-    }
+    }catch(e){ fails.push(n.name+': '+e.message); } }
     await vSave();
     if(imp){ renderTree(); if(state.activeId) openNote(state.activeId); }
-    vUi('ok'); if(manual||imp) toast(`پوشه همگام شد ✓ ${fa(imp)} مورد از پوشه، ${fa(out)} مورد به پوشه`,4000);
+    vUi('ok'); if(fails.length){ console.warn('vault fails',fails); toast(`⚠ ${fa(fails.length)} مورد همگام نشد (${fails[0]})`,8000); } else if(manual||imp) toast(`پوشه همگام شد ✓ ${fa(imp)} مورد از پوشه، ${fa(out)} مورد به پوشه`,4000);
   }catch(e){ console.error(e); vUi('ok'); toast('⚠ همگام‌سازی پوشه: '+e.message,6000); }
   finally{ VAULT.busy=false; }
 }

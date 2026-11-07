@@ -150,7 +150,9 @@ button.primary{background:var(--accent)!important;color:#fff;border-color:transp
 .bcard{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:10px 12px;cursor:pointer}.bcard:hover{border-color:var(--accent)}.bcard.drag{opacity:.45}.bt{font-weight:600;font-size:14px}.bxs{margin-top:6px;display:flex;flex-wrap:wrap;gap:3px;font-size:12px;color:var(--muted)}
 .badd{width:100%;margin-top:8px;padding:7px;border-radius:9px;color:var(--muted);font-size:13px}.badd:hover{background:var(--hover);color:var(--text)}
 /* هاب دانش */
-.hub3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.hub3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.hub3>.hcard{min-width:0;overflow:hidden}
+#hubA,#hubB{display:block}#hubB>.hcard{margin-bottom:12px}
 @media(max-width:900px){.hub3{grid-template-columns:1fr}}
 .hcard textarea{width:100%;min-height:92px;resize:vertical;background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:10px;color:var(--text);font:inherit;box-sizing:border-box}
 .qb{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.qb button{padding:8px 14px;border-radius:10px;background:var(--panel2);font-size:13.5px}.qb button:hover{outline:1px solid var(--accent)}

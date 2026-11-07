@@ -180,6 +180,40 @@ button.primary{background:var(--accent)!important;color:#fff;border-color:transp
 .editor .col>:first-child{margin-top:0}
 @media(max-width:760px){.editor .cols{grid-template-columns:1fr}}
 
+/* ===== تم ستاره‌ای (Celestial) ===== */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;display:none;transition:opacity .4s}
+:root[data-skin="celestial"]{--bg:#06061a;--panel:#10102a;--panel2:#1b1b3d;--border:#212149;--text:#e8eaf8;--muted:#7b7fae;--accent:#3cdaca;--hover:#1d1d42;--code-bg:#15153a}
+:root[data-skin="celestial"] #starfield{display:block}
+:root[data-skin="celestial"],:root[data-skin="celestial"] body{background:linear-gradient(180deg,#050511 0%,#0d0d26 48%,#19193c 100%) fixed}
+body:has(.main:not(.is-home):not(.is-cal):not(.is-db)) #starfield{opacity:.6}
+:root[data-skin="celestial"] .app{position:relative;z-index:1;background:transparent;padding:10px;gap:10px;box-sizing:border-box}
+:root[data-skin="celestial"] .sidebar{background:rgba(14,15,35,.84);border:1px solid #1d1d42;border-radius:18px;backdrop-filter:blur(8px)}
+:root[data-skin="celestial"] .sb-head{border-bottom-color:#1b1b3e}
+:root[data-skin="celestial"] .main{background:transparent;border-radius:18px}
+:root[data-skin="celestial"] .topbar{background:rgba(13,13,33,.86);border:1px solid #1d1d42;border-radius:16px;backdrop-filter:blur(8px);margin-bottom:6px}
+:root[data-skin="celestial"] .sb-title,:root[data-skin="celestial"] .hero h1{background:linear-gradient(90deg,#3cdaca 0%,#9be7a0 50%,#fdd835 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+:root[data-skin="celestial"] .sb-title::before{content:'⭐';-webkit-text-fill-color:#fdd835;margin-inline-end:7px;filter:drop-shadow(0 0 6px rgba(253,216,53,.55))}
+:root[data-skin="celestial"] .hero h1 .h-emo{-webkit-text-fill-color:#fff;background:none}
+:root[data-skin="celestial"] .node.active{background:#252540;color:var(--accent)}
+:root[data-skin="celestial"] .btn-big,:root[data-skin="celestial"] button.primary,:root[data-skin="celestial"] .seg button.on{background:linear-gradient(135deg,#3cdaca,#25b7a7)!important;color:#04232a!important;border-color:transparent;box-shadow:0 8px 26px rgba(60,218,202,.22)}
+:root[data-skin="celestial"] .bar i{background:linear-gradient(90deg,#49cbd2,#7b4edf)}
+:root[data-skin="celestial"] .g-chip.g-a{background:linear-gradient(135deg,#3cdaca,#25b7a7);color:#04232a}
+:root[data-skin="celestial"] .hcard,:root[data-skin="celestial"] .stat,:root[data-skin="celestial"] .cday,:root[data-skin="celestial"] .gcard,:root[data-skin="celestial"] .bcol,:root[data-skin="celestial"] .db-t{box-shadow:0 0 0 1px rgba(60,60,130,.12) inset}
+:root[data-skin="celestial"] .hcard:hover,:root[data-skin="celestial"] .gcard:hover,:root[data-skin="celestial"] .cday:hover{box-shadow:0 0 24px rgba(60,218,202,.14)}
+:root[data-skin="celestial"] .stat b{color:var(--accent)}
+:root[data-skin="celestial"] ::-webkit-scrollbar-thumb{background:#262650;border-radius:8px}
+/* کارت‌های شیشه‌ای ملایم */
+:root[data-skin="celestial"] .hcard,:root[data-skin="celestial"] .stat,:root[data-skin="celestial"] .gcard,:root[data-skin="celestial"] .bcol:not(.over),:root[data-skin="celestial"] .bcard,:root[data-skin="celestial"] .db-t,:root[data-skin="celestial"] .cday:not(.today),:root[data-skin="celestial"] .pg-props,:root[data-skin="celestial"] .btn-ghost{
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015) 60%),rgba(16,16,42,.42);
+  -webkit-backdrop-filter:blur(7px) saturate(125%);backdrop-filter:blur(7px) saturate(125%);
+  border-color:rgba(255,255,255,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 22px rgba(2,2,14,.28)}
+:root[data-skin="celestial"] .hcard:hover,:root[data-skin="celestial"] .gcard:hover,:root[data-skin="celestial"] .cday:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 24px rgba(60,218,202,.14)}
+.clk{display:none;direction:ltr;align-items:center;gap:8px;padding:5px 12px;border-radius:10px;background:#12122e;border:1px solid #1f1f46;font-family:ui-monospace,'JetBrains Mono',Consolas,monospace;color:#3cdaca;font-size:15px;letter-spacing:.6px}
+.clk small{color:#5a5e8a;font-size:10px;letter-spacing:.3px}
+:root[data-skin="celestial"] .clk{display:inline-flex}
+@media(max-width:760px){.clk small{display:none}}
+
 /* ===== صفحهٔ ورودی ===== */
 .main.is-home .doc{display:none}
 body:has(.main.is-home) #bhandle,body:has(.main.is-home) #ftb,body:has(.main.is-home) #slash{display:none!important}
@@ -610,7 +644,7 @@ async function requestPersistence(){
 
 /* ===================== 2) STATE & MODEL ===================== */
 const SKINS={
-  dark:{n:'سیاه',b:'dark',c:'#7c5cff',p:'#0f0f10'}, light:{n:'سفید',b:'light',c:'#6d4aff',p:'#ffffff'},
+  celestial:{n:'ستاره‌ای',b:'dark',c:'#3cdaca',p:'#06061a'}, dark:{n:'سیاه',b:'dark',c:'#7c5cff',p:'#0f0f10'}, light:{n:'سفید',b:'light',c:'#6d4aff',p:'#ffffff'},
   ocean:{n:'اقیانوس',b:'dark',c:'#38bdf8',p:'#0a1626'}, forest:{n:'جنگل',b:'dark',c:'#34d399',p:'#0a1812'},
   sunset:{n:'غروب',b:'dark',c:'#fb7185',p:'#1a0f1e'}, royal:{n:'شاهانه',b:'dark',c:'#a78bfa',p:'#120e22'},
   rose:{n:'گل رز',b:'light',c:'#e11d73',p:'#fff7f9'}, sand:{n:'شنی',b:'light',c:'#d97706',p:'#fffaf0'},
@@ -619,7 +653,7 @@ const SKINS={
   midnight:{n:'نیمه‌شب',b:'dark',c:'#818cf8',p:'#0b0d1f'}, magenta:{n:'ارغوانی',b:'dark',c:'#e879f9',p:'#1c0e1b'}, coffee:{n:'قهوه‌ای',b:'dark',c:'#d6a06b',p:'#181210'},
   lavender:{n:'اسطوخودوس',b:'light',c:'#7c3aed',p:'#faf7ff'}, peach:{n:'هلویی',b:'light',c:'#ea580c',p:'#fff8f3'},
   lemon:{n:'لیمویی',b:'light',c:'#a16207',p:'#fefdf0'}, aqua:{n:'آبی یخی',b:'light',c:'#0891b2',p:'#f1fcfd'}, sage:{n:'مریم‌گلی',b:'light',c:'#4d7c0f',p:'#f6f9f2'}};
-const state={nodes:[],activeId:null,theme:localStorage.getItem('mn-theme')||'dark',skin:localStorage.getItem('mn-skin')||null};
+const state={nodes:[],activeId:null,theme:localStorage.getItem('mn-theme')||'dark',skin:(localStorage.getItem('mn-cel9')?localStorage.getItem('mn-skin'):'celestial')||null};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const now=()=>Date.now();
 
@@ -663,7 +697,7 @@ function applyTheme(){
   const sk=SKINS[state.skin]?state.skin:(SKINS[state.theme]?state.theme:'dark'); state.skin=sk; state.theme=SKINS[sk].b;
   document.documentElement.dataset.theme=state.theme; document.documentElement.dataset.skin=sk;
   document.getElementById('btnTheme').textContent=state.theme==='dark'?'☀️':'🌙';
-  localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk); localStorage.setItem('mn-skin-'+state.theme,sk);
+  localStorage.setItem('mn-cel9','1'); localStorage.setItem('mn-theme',state.theme); localStorage.setItem('mn-skin',sk); localStorage.setItem('mn-skin-'+state.theme,sk);
   const mt=document.querySelector('meta[name=theme-color]'); if(mt) mt.setAttribute('content',SKINS[sk].p);
   if(window.renderHome&&state.activeId===null) renderHome();
 }
@@ -2053,7 +2087,7 @@ window.renderHome=function(){
   $('hRecent').innerHTML=rec.length?rec.map(n=>`<div class="rrow" data-id="${n.id}"><span>📄</span><b>${escapeHtml(n.name)}</b><small>${escapeHtml(pathOf(n))}</small></div>`).join(''):'<p class="muted">هنوز یادداشتی نداری؛ از «یادداشت جدید» شروع کن ✍️</p>';
   const ln=notes.find(n=>n.id===localStorage.getItem('mn-last')); $('hCont').style.display=ln?'':'none'; if(ln){ $('hCont').dataset.id=ln.id; $('hCont').textContent='📖 ادامه: '+ln.name.slice(0,22); }
   const sk=b=>Object.entries(SKINS).filter(([k,s])=>s.b===b).map(([k,s])=>`<button class="skin${k===state.skin?' on':''}" data-skin="${k}" title="${s.n}"><i style="background:linear-gradient(135deg,${s.p} 50%,${s.c} 50%)"></i><span>${s.n}</span></button>`).join('');
-  $('hSkins').innerHTML='<div class="sk-title">🌙 حالت‌های شب ('+fa(10)+')</div><div class="skins">'+sk('dark')+'</div><div class="sk-title" style="margin-top:14px">☀️ حالت‌های روز ('+fa(10)+')</div><div class="skins">'+sk('light')+'</div>';
+  $('hSkins').innerHTML='<div class="sk-title">🌙 حالت‌های شب ('+fa(Object.values(SKINS).filter(s=>s.b==='dark').length)+')</div><div class="skins">'+sk('dark')+'</div><div class="sk-title" style="margin-top:14px">☀️ حالت‌های روز ('+fa(Object.values(SKINS).filter(s=>s.b==='light').length)+')</div><div class="skins">'+sk('light')+'</div>';
 };
 $('home').addEventListener('click',e=>{
   /* مهم: <html> هم خودش data-skin دارد؛ پس فقط داخل خود #home و با کلاس مشخص جست‌وجو می‌کنیم */
@@ -2913,6 +2947,34 @@ window.pdfHeadHTML=n=>{
   const bg=n.cover?(n.cover.startsWith('grad:')?GRADS[+n.cover.slice(5)%GRADS.length]:"url('"+n.cover.replace(/'/g,'%27')+"') center/cover"):'';
   const ic=n.icon?(isImg(n.icon)?`<img class="picon" src="${escapeHtml(n.icon)}" alt="">`:`<div class="picon">${escapeHtml(n.icon)}</div>`):'';
   return (n.cover?`<div class="pcover" style="background:${bg}"></div>`:'')+(ic?`<div class="picwrap${n.cover?' ov':''}">${ic}</div>`:''); };
+
+/* =====================================================================
+   46) تم ستاره‌ای: آسمان پرستاره + ساعت زنده
+   ===================================================================== */
+(function(){
+  const c=document.createElement('canvas'); c.id='starfield'; document.body.prepend(c); const x=c.getContext('2d');
+  let W=0,H=0,stars=[],raf=0,last=0; const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const on=()=>document.documentElement.dataset.skin==='celestial';
+  function seed(){ const dpr=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight; c.width=W*dpr; c.height=H*dpr; c.style.width=W+'px'; c.style.height=H+'px'; x.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.round(W*H/14000); stars=[];
+    for(let i=0;i<n;i++){ const big=Math.random()<.04, q=Math.random(); stars.push({x:Math.random()*W,y:Math.random()*H,r:big?1.2+Math.random()*.9:.35+Math.random()*.7,ph:Math.random()*6.28,sp:.4+Math.random()*1.6,vy:.01+Math.random()*.05,big,tint:q<.12?'#9fe9ff':q<.2?'#ffe9a8':'#ffffff'}); } }
+  function draw(t){ x.clearRect(0,0,W,H);
+    for(const s of stars){ x.globalAlpha=.25+.6*Math.abs(Math.sin(t/1000*s.sp+s.ph)); x.fillStyle=s.tint;
+      if(s.big){ x.shadowColor=s.tint; x.shadowBlur=6; } x.beginPath(); x.arc(s.x,s.y,s.r,0,6.2832); x.fill(); x.shadowBlur=0;
+      if(!rm){ s.y-=s.vy; if(s.y<-3){ s.y=H+3; s.x=Math.random()*W; } } }
+    x.globalAlpha=1; }
+  function frame(t){ raf=0; if(!on()||document.hidden) return; if(t-last>=32){ last=t; draw(t); } if(!rm) raf=requestAnimationFrame(frame); }
+  function sync(){ if(on()){ if(!stars.length) seed(); if(!raf) raf=requestAnimationFrame(frame); } else{ cancelAnimationFrame(raf); raf=0; x.clearRect(0,0,W,H); } }
+  new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['data-skin']});
+  addEventListener('resize',()=>{ seed(); sync(); }); document.addEventListener('visibilitychange',sync); sync();
+  /* ساعت زنده در نوار بالا (فقط در تم ستاره‌ای دیده می‌شود) */
+  const clk=document.createElement('span'); clk.className='clk'; clk.id='clk';
+  const tb=document.querySelector('.topbar'); tb.insertBefore(clk,tb.children[1]||null);
+  const off=-new Date().getTimezoneOffset()/60, sign=off>=0?'+':'-', ah=Math.floor(Math.abs(off)), am=Math.round((Math.abs(off)-ah)*60);
+  const tz='UTC'+sign+String(ah).padStart(2,'0')+':'+String(am).padStart(2,'0');
+  const tick=()=>{ if(!on()) return; clk.innerHTML='<small>'+tz+'</small>'+new Date().toLocaleTimeString('en-GB'); };
+  setInterval(tick,1000); tick();
+})();
 
 /* ---------- 40) شروع بخش ۳ (بعد از بوت) ---------- */
 window.afterBoot=function(){ vInit();

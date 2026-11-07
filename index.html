@@ -284,6 +284,16 @@ body:has(.main.is-home) #bhandle,body:has(.main.is-home) #ftb,body:has(.main.is-
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
 *{box-sizing:border-box}
+/* نوار اسکرول هم‌رنگ تم: نازک، بی‌فلش، و در نواحی اصلی فقط با رفتن ماوس نمایان */
+html,*{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--accent) 38%,transparent) transparent}
+.main,.tree,.db-t,.db-b{scrollbar-color:transparent transparent}
+.main:hover,.tree:hover,.db-t:hover,.db-b:hover{scrollbar-color:color-mix(in srgb,var(--accent) 45%,transparent) transparent}
+@supports not (scrollbar-width:thin){
+  ::-webkit-scrollbar{width:7px;height:7px;background:transparent}
+  ::-webkit-scrollbar-button{display:none}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 40%,transparent);border-radius:8px}
+}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--font)}
 button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
